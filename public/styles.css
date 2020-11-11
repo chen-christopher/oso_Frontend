@@ -1,0 +1,47 @@
+
+
+body {
+    
+    font-family: 'Dosis', sans-serif;
+    font-size: 10rem;
+}
+
+
+
+.title {
+    padding: 1rem;
+    background-color: rgb(250, 237, 220);
+    color: rgb(54, 54, 54);
+    font-family: 'Dosis', sans-serif;
+    font-size: 5rem;
+    text-align: center;
+
+}
+
+
+
+
+
+.optionsButton {
+    border-radius: 10px;
+    font-family: 'Dosis', sans-serif;
+    font-size: 3rem;
+    margin: 1rem;
+    padding: 1rem;
+    border-style: none;
+    width: 100%;
+    align-self: center;
+    background-color: rgba(81, 148, 250, 0.26);
+    color: rgb(255, 255, 255);
+}
+
+.containerOptions {
+    margin-top: 5rem;
+}
+
+
+
+
+
+
+
