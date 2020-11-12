@@ -4,6 +4,7 @@ import Landing from './pages/Landing';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './pages/Login';
 import Create from './pages/Create';
+import Lobby from './pages/Lobby';
 import {
   BrowserRouter as Router,
   Switch,

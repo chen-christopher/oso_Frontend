@@ -5,35 +5,31 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { useHistory } from 'react-router-dom';
 
-function Login() {
+function Lobby(){
     let history = useHistory();
-    var code;
-    return (
-        <div>
-            <PageTitle title = "Login"/>
-
+    
+    return(
+        <div >
+            <PageTitle title="Poker Platform" />
             <Container fluid className="containerOptions">
                 <Row className="optionsRow">
                     <Col lg={{ span: 4, offset: 4 }}>
-                        <label class='optionsButton'>
-                            Code:
-                            <input type="text" /> 
-                        </label>                       
+                        
                     </Col>
+
+
                 </Row>
 
                 <Row>
                     <Col lg={{ span: 4, offset: 4 }}>
-                        <button onClick={() => {
-                            history.push("/lobby");
-                        }} className="optionsButton">
-                            Join Game
-                        </button>
+                        
                     </Col>
                 </Row>
+
             </Container>
+
         </div>
-    );
+    )
 }
 
-export default Login;
+export default Lobby;

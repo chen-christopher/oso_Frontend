@@ -30,7 +30,7 @@ function Landing() {
                         <button onClick={() => {
                             history.push("/login");
                         }} className="optionsButton">
-                            aaa
+                            Join Game
                         </button>
                     </Col>
                 </Row>
