@@ -17,7 +17,7 @@ function Login() {
                     <Col lg={{ span: 4, offset: 4 }}>
                         <label class='optionsButton'>
                             Code:
-                            <input type="text" /> 
+                            <input class = "codeEntry" type="text" /> 
                         </label>                       
                     </Col>
                 </Row>

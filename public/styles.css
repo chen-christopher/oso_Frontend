@@ -27,6 +27,16 @@ body {
 .containerOptions {
   margin-top: 5rem;
 }
+.codeDisplay{
+    float:right;
+    width: 75%;
+    color: black;
+}
+.codeEntry{
+    float: right;
+    width: 75%;
+}
+
 /********** LOBBY *************/
 /* styling for lobby items */
 .lobbyDiv {
