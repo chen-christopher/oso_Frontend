@@ -27,14 +27,14 @@ body {
 .containerOptions {
   margin-top: 5rem;
 }
-.codeDisplay{
-    float:right;
-    width: 75%;
-    color: black;
+.codeDisplay {
+  float: right;
+  width: 75%;
+  color: black;
 }
-.codeEntry{
-    float: right;
-    width: 75%;
+.codeEntry {
+  float: right;
+  width: 75%;
 }
 
 /********** LOBBY *************/
@@ -75,4 +75,47 @@ body {
   flex-direction: row;
   position: absolute;
   right: 2%;
+}
+.lobbyContainer {
+  margin-top: 1rem;
+}
+
+/* game table */
+
+.gameContainer {
+  margin-top: 4rem;
+}
+/*div for table*/
+.gameStyles {
+  font-family: "Dosis", sans-serif;
+  display: flex;
+  font-size: 3rem;
+  text-align: center;
+  justify-content: center;
+}
+/*div itself */
+.gameTable {
+  background-color: seagreen;
+  width: 100%;
+  height: 55vh;
+  border-radius: 10px;
+}
+/*styling buttons*/
+.buttonStyles {
+  border-radius: 10px;
+  font-family: "Dosis", sans-serif;
+  font-size: 1.5rem;
+  border-style: none;
+  width: 100%;
+  align-self: center;
+  background-color: darkslategrey;
+  color: rgb(255, 255, 255);
+  padding: 1rem;
+}
+/* logo position/size */
+.logo {
+  width: 4vw;
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
 }
