@@ -13,6 +13,14 @@ function Create() {
       <PageTitle title="New Game" />
       <Container fluid className="containerOptions">
         <Row className="optionsRow">
+            <Col lg={{ span: 4, offset: 4 }}>
+                <label class='optionsButton'>
+                    Username:
+                    <input class = "textEntry" type="text" /> 
+                </label>                       
+            </Col>
+        </Row>
+        <Row className="optionsRow">
           <Col lg={{ span: 4, offset: 4 }}>
             <label class="optionsButton">
               Code:

@@ -7,17 +7,25 @@ import { useHistory } from 'react-router-dom';
 
 function Login() {
     let history = useHistory();
-    var code;
+    //var code;
     return (
         <div>
-            <PageTitle title = "Login"/>
+            <PageTitle title = "Join Game"/>
 
             <Container fluid className="containerOptions">
                 <Row className="optionsRow">
                     <Col lg={{ span: 4, offset: 4 }}>
                         <label class='optionsButton'>
+                            Username:
+                            <input class = "textEntry" type="text" /> 
+                        </label>                       
+                    </Col>
+                </Row>
+                <Row className="optionsRow">
+                    <Col lg={{ span: 4, offset: 4 }}>
+                        <label class='optionsButton'>
                             Code:
-                            <input class = "codeEntry" type="text" /> 
+                            <input class = "textEntry" type="text" /> 
                         </label>                       
                     </Col>
                 </Row>

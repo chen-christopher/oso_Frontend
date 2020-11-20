@@ -5,6 +5,8 @@ import Col from "react-bootstrap/Col";
 import PageTitle from "../components/PageTitle";
 import { useHistory } from "react-router-dom";
 import { ReactComponent as Logo } from "./return.svg";
+import Deck from 'react-poker';
+
 
 function Game() {
   let history = useHistory();
