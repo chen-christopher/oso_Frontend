@@ -3,6 +3,7 @@ import PageTitle from "../components/PageTitle";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { ReactComponent as Logo } from "./return.svg";
 import { useHistory } from "react-router-dom";
 
 function Lobby() {
@@ -11,6 +12,12 @@ function Lobby() {
   return (
     <div>
       <PageTitle title="Game Lobby" />
+      <Logo
+                className="logo"
+                onClick={() => {
+                history.push("/landing");
+                }}
+            />
       <Container fluid className="lobbyContainer">
         <Row>
           <Col lg={{ span: 4, offset: 4 }}>
