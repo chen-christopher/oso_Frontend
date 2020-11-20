@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 
 function Login() {
     let history = useHistory();
-    var code;
+
     return (
         <div>
             <PageTitle title = "Login"/>
