@@ -5,9 +5,38 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { ReactComponent as Logo } from "./return.svg";
 import { useHistory } from "react-router-dom";
+import socketIOClient from "socket.io-client"; 
+
+const socket = socketIOClient('http://localhost:3000', {
+  transports: ['websocket'],
+  autoConnect: false,
+})
 
 function Lobby() {
   let history = useHistory();
+  
+  const [connectionStatus, setConnectionStatus] = useState(false)
+  const [time, setTime] = useState([])
+  const [channel, setChannel] = useState()
+
+  useEffect(() => {
+    socket.on(channel, (data) => {
+      setTime((prev) => [data, ...prev])
+    })
+  }, [channel])
+
+  const handleSocket = () => {
+    socket.open()
+    socket.on('connect', () => {
+      setChannel(socket.connected ? socket.id : '')
+    })
+  }
+
+  const handleToggle = () => {
+    socket.connected ? socket.close() : handleSocket()
+    setConnectionStatus((prev) => !prev)
+    setTime([])
+  }
 
   return (
     <div>
