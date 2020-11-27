@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -7,6 +7,12 @@ import { useHistory } from "react-router-dom";
 import { ReactComponent as Logo } from "./return.svg";
 import Deck from 'react-poker';
 
+import socketIOClient from "socket.io-client"; 
+
+const socket = socketIOClient('http://localhost:3000', {
+  transports: ['websocket'],
+  autoConnect: false,
+})
 
 function Game() {
   let history = useHistory();

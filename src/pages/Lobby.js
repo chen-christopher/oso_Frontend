@@ -42,11 +42,11 @@ function Lobby() {
     <div>
       <PageTitle title="Game Lobby" />
       <Logo
-                className="logo"
-                onClick={() => {
-                history.push("/landing");
-                }}
-            />
+        className="logo"
+        onClick={() => {
+        history.push("/landing");
+        }}
+      />
       <Container fluid className="lobbyContainer">
         <Row>
           <Col lg={{ span: 4, offset: 4 }}>
