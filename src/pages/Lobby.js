@@ -18,28 +18,18 @@ const socket = socketIOClient('http://localhost:3000', {
 function Lobby() {
   let history = useHistory();
   
-  const [connectionStatus, setConnectionStatus] = useState(false)
-  const [time, setTime] = useState([])
-  const [channel, setChannel] = useState()
+  const [users, setUsers] = useState([])
 
-  useEffect(() => {
-    socket.on(channel, (data) => {
-      setTime((prev) => [data, ...prev])
-    })
-  }, [channel])
+  socket.open()
+  socket.on('connect', () => {
+    console.log("CONNECTED")
+  })
 
-  const handleSocket = () => {
-    socket.open()
-    socket.on('connect', () => {
-      setChannel(socket.connected ? socket.id : '')
-    })
-  }
+  socket.on('lobby', (data) => {
+    setUsers(data)
+  })
 
-  const handleToggle = () => {
-    socket.connected ? socket.close() : handleSocket()
-    setConnectionStatus((prev) => !prev)
-    setTime([])
-  }
+
   
 
 
@@ -48,47 +38,23 @@ function Lobby() {
     <div>
     
       <PageTitle title="Game Lobby" />
-      <div>
-      {connectionStatus ? 'Connected to ' + channel : 'Disconnected'}
-      <br />
-      <button onClick={handleToggle}>
-        {' '}
-        {connectionStatus ? 'Disconnect' : 'Connect'}
-      </button>
-      <div>{time && time.map((entry) => <p key={entry}>{entry}</p>)}</div>
-    </div>
+      
+      
+    
       <Container fluid className="lobbyContainer">
-        <Row>
-          <Col lg={{ span: 4, offset: 4 }}>
-            <label className="lobbyDiv">Host: XxPolarDealerxX</label>
-          </Col>
-        </Row>
 
+      {users && users.map((user) => <p>
         <Row>
           <Col lg={{ span: 4, offset: 4 }}>
-            <label className="lobbyDiv">Waiting for players . . .</label>
+            <label className="lobbyDiv"> {user}</label>
           </Col>
         </Row>
-        <Row>
-          <Col lg={{ span: 4, offset: 4 }}>
-            <label className="lobbyDiv">Waiting for players . . .</label>
-          </Col>
-        </Row>
-        <Row>
-          <Col lg={{ span: 4, offset: 4 }}>
-            <label className="lobbyDiv">Waiting for players . . .</label>
-          </Col>
-        </Row>
-        <Row>
-          <Col lg={{ span: 4, offset: 4 }}>
-            <label className="lobbyDiv">Waiting for players . . .</label>
-          </Col>
-        </Row>
-        <Row>
-          <Col lg={{ span: 4, offset: 4 }}>
-            <label className="lobbyDiv">Waiting for players . . .</label>
-          </Col>
-        </Row>
+      
+      </p>)}
+
+        
+
+        
         <Row>
           <div className="flexRow">
             <div>
