@@ -3,7 +3,7 @@ import PageTitle from "../components/PageTitle";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import socketIOClient from 'socket.io-client'; 
 
 const socket = socketIOClient('http://localhost:3000', {
@@ -17,7 +17,7 @@ const socket = socketIOClient('http://localhost:3000', {
 
 function Lobby() {
   let history = useHistory();
-  
+  const location = useLocation();
   const [users, setUsers] = useState([])
 
   socket.open()
@@ -25,9 +25,16 @@ function Lobby() {
     console.log("CONNECTED")
   })
 
-  socket.on('lobby', (data) => {
+  socket.on('lobby', (data) => { 
     setUsers(data)
   })
+
+
+  
+
+
+
+  
 
 
   
@@ -39,14 +46,18 @@ function Lobby() {
     
       <PageTitle title="Game Lobby" />
       
-      
     
       <Container fluid className="lobbyContainer">
 
       {users && users.map((user) => <p>
         <Row>
           <Col lg={{ span: 4, offset: 4 }}>
-            <label className="lobbyDiv"> {user}</label>
+            <label className="lobbyDiv"> 
+            
+            {user}
+            
+            </label>
+            
           </Col>
         </Row>
       
@@ -59,7 +70,7 @@ function Lobby() {
           <div className="flexRow">
             <div>
               <label className="lobbyDiv" id="codeDisplayButton">
-                Code:
+                Code: {location.state.table_id  }
               </label>
             </div>
 

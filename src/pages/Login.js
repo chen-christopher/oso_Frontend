@@ -25,6 +25,7 @@ function Login() {
                 <Row>
                     <Col lg={{ span: 4, offset: 4 }}>
                         <button onClick={() => {
+                            //socket.emit("newParticipant", {"username": "usernameA", "table_id" : code)
                             history.push("/lobby");
                         }} className="optionsButton">
                             Join Game
