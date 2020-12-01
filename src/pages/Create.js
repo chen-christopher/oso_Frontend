@@ -5,9 +5,35 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { ReactComponent as Logo } from "./return.svg";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
+
+
+const base = "http://localhost:3000/"
 
 function Create() {
-  let history = useHistory();
+
+const history = useHistory();
+
+function createGameClick() {
+    axios.get(base + "create", {
+      headers: {"username": "USERA"} //ACTUAL USERNAME NEEDS TO BE PASSED INSTEAD OF USERA
+    })
+    .then(response => {
+      console.log(response.data)
+      history.push({
+        pathname: '/lobby',
+        state: response.data
+      })
+
+    })
+    .catch(error => {
+      console.log(error);
+    });
+}
+
+
+
+  
   return (
     <div>
       <PageTitle title="New Game" />
@@ -32,7 +58,7 @@ function Create() {
           <Col lg={{ span: 4, offset: 4 }}>
             <button
               onClick={() => {
-                history.push("/lobby");
+                createGameClick()
               }}
               className="optionsButton"
             >

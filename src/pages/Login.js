@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 
 function Login() {
     let history = useHistory();
-    //var code;
+    
     return (
         <div>
             <PageTitle title = "Join Game"/>
@@ -39,6 +39,7 @@ function Login() {
                 <Row>
                     <Col lg={{ span: 4, offset: 4 }}>
                         <button onClick={() => {
+                            //socket.emit("newParticipant", {"username": "usernameA", "table_id" : code)
                             history.push("/lobby");
                         }} className="optionsButton">
                             Join Game

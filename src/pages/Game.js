@@ -15,6 +15,19 @@ const socket = socketIOClient('http://localhost:3000', {
 })
 
 function Game() {
+
+
+  //HOOKS data = {table_cards: asdasd, active_players: asdasdasd, big_blind_Position: jaksjdkajsd, "players_turn": akjsjdjasd}
+
+/*
+
+  socket.on("game", data) {
+    updateData(data)
+  }
+
+
+*/
+
   let history = useHistory();
   return (
     <div>
