@@ -20,16 +20,20 @@ const socket = socketIOClient('http://localhost:3000', {
 function Lobby() {
   let history = useHistory();
   const location = useLocation();
-  const [users, setUsers] = useState([])
+  const [users, setUsers] = useState(location.state.participants_usernames)
 
   socket.open()
   socket.on('connect', () => {
     console.log("CONNECTED")
   })
 
+  socket.emit('connectToRoom', {"table_id": location.state.table_id})
+
   socket.on('lobby', (data) => { 
     setUsers(data)
   })
+
+
   
 
 
