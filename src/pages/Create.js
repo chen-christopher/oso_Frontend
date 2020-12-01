@@ -8,7 +8,6 @@ import { useHistory } from "react-router-dom";
 
 function Create() {
   let history = useHistory();
-  var code = Math.floor(100000 + Math.random() * 900000); //generate this from the db
   return (
     <div>
       <PageTitle title="New Game" />
@@ -27,14 +26,7 @@ function Create() {
                 </label>                       
             </Col>
         </Row>
-        <Row className="optionsRow">
-          <Col lg={{ span: 4, offset: 4 }}>
-            <label class="optionsButton">
-              Code:
-              <div class="codeDisplay">{code}</div>
-            </label>
-          </Col>
-        </Row>
+        
 
         <Row>
           <Col lg={{ span: 4, offset: 4 }}>
