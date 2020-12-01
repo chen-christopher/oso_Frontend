@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import PageTitle from "../components/PageTitle";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -6,6 +6,7 @@ import Col from "react-bootstrap/Col";
 import { ReactComponent as Logo } from "./return.svg";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import { useState } from "react";
 
 
 const base = "http://localhost:3000/"
@@ -14,9 +15,15 @@ function Create() {
 
 const history = useHistory();
 
+this.state = {username: ''};
+
+function handleChange(event){
+  this.setState({username: event.target.value});
+}
+
 function createGameClick() {
     axios.get(base + "create", {
-      headers: {"username": "USERA"} //ACTUAL USERNAME NEEDS TO BE PASSED INSTEAD OF USERA
+      headers: {"username": this.state.username } //ACTUAL USERNAME NEEDS TO BE PASSED INSTEAD OF USERA
     })
     .then(response => {
       console.log(response.data)
@@ -47,8 +54,10 @@ function createGameClick() {
         <Row className="optionsRow">
             <Col lg={{ span: 4, offset: 4 }}>
                 <label class='optionsButton'>
+                  <form>
                     Username:
-                    <input class = "textEntry" type="text" /> 
+                    <input class = "textEntry" type="text" value = {this.state.username} onChange={this.handleChange} /> 
+                  </form>
                 </label>                       
             </Col>
         </Row>

@@ -11,9 +11,19 @@ const base = "http://localhost:3000/"
 function Login() {
     let history = useHistory();
 
+    this.state = {username: '', table_id: ''};
+
+    function handleUsername(event){
+        this.setState({username: event.target.value});
+    }
+
+    function handleID(event){
+        this.setState({username: event.target.value})
+    }
+
     function joinGameClick() {
         axios.get(base + "join", {
-            headers: {"username": "USERB", "table_id": 5} //ACTUAL USERNAME AND TABLE_ID NEEDS TO BE PASSED INSTEAD OF USERA AND TABLE_ID
+            headers: {"username": username, "table_id": table_id} //ACTUAL USERNAME AND TABLE_ID NEEDS TO BE PASSED INSTEAD OF USERA AND TABLE_ID
           })
           .then(response => {
             console.log(response.data)
