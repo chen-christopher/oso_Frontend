@@ -3,35 +3,51 @@ import PageTitle from '../components/PageTitle'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import { ReactComponent as Logo } from "./return.svg";
 import { useHistory } from 'react-router-dom';
+import axios from "axios";
+
+const base = "http://localhost:3000/"
 
 function Login() {
     let history = useHistory();
-    //var code;
+
+    this.state = {username: '', table_id: ''};
+
+    function handleUsername(event){
+        this.setState({username: event.target.value});
+    }
+
+    function handleID(event){
+        this.setState({username: event.target.value})
+    }
+
+    function joinGameClick() {
+        axios.get(base + "join", {
+            headers: {"username": username, "table_id": table_id} //ACTUAL USERNAME AND TABLE_ID NEEDS TO BE PASSED INSTEAD OF USERA AND TABLE_ID
+          })
+          .then(response => {
+            console.log(response.data)
+            history.push({
+              pathname: '/lobby',
+              state: response.data
+            })
+      
+          })
+          .catch(error => {
+            console.log(error);
+          });
+    }
+
     return (
         <div>
-            <PageTitle title = "Join Game"/>
-            <Logo
-                className="logo"
-                onClick={() => {
-                history.push("/landing");
-                }}
-            />
+            <PageTitle title = "Login"/>
+
             <Container fluid className="containerOptions">
                 <Row className="optionsRow">
                     <Col lg={{ span: 4, offset: 4 }}>
                         <label class='optionsButton'>
-                            Username:
-                            <input class = "textEntry" type="text" /> 
-                        </label>                       
-                    </Col>
-                </Row>
-                <Row className="optionsRow">
-                    <Col lg={{ span: 4, offset: 4 }}>
-                        <label class='optionsButton'>
                             Code:
-                            <input class = "textEntry" type="text" /> 
+                            <input class = "codeEntry" type="text" /> 
                         </label>                       
                     </Col>
                 </Row>
@@ -39,7 +55,8 @@ function Login() {
                 <Row>
                     <Col lg={{ span: 4, offset: 4 }}>
                         <button onClick={() => {
-                            history.push("/lobby");
+                            joinGameClick()
+                            
                         }} className="optionsButton">
                             Join Game
                         </button>

@@ -1,89 +1,62 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import PageTitle from "../components/PageTitle";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { ReactComponent as Logo } from "./return.svg";
-import { useHistory } from "react-router-dom";
-import socketIOClient from "socket.io-client"; 
+import { useHistory, useLocation } from "react-router-dom";
+import socketIOClient from "socket.io-client";
 
-const socket = socketIOClient('http://localhost:3000', {
-  transports: ['websocket'],
+const socket = socketIOClient("http://localhost:3000", {
+  transports: ["websocket"],
   autoConnect: false,
-})
+});
 
 function Lobby() {
   let history = useHistory();
+  const location = useLocation();
+  const [users, setUsers] = useState(location.state.participants_usernames)
+
+  socket.open()
+  socket.on('connect', () => {
+    console.log("CONNECTED")
+  })
+
+  socket.emit('connectToRoom', {"table_id": location.state.table_id})
+
+  socket.on('lobby', (data) => { 
+    setUsers(data)
+  })
+
+
   
-  const [connectionStatus, setConnectionStatus] = useState(false)
-  const [time, setTime] = useState([])
-  const [channel, setChannel] = useState()
 
-  useEffect(() => {
-    socket.on(channel, (data) => {
-      setTime((prev) => [data, ...prev])
-    })
-  }, [channel])
-
-  const handleSocket = () => {
-    socket.open()
-    socket.on('connect', () => {
-      setChannel(socket.connected ? socket.id : '')
-    })
-  }
-
-  const handleToggle = () => {
-    socket.connected ? socket.close() : handleSocket()
-    setConnectionStatus((prev) => !prev)
-    setTime([])
-  }
+  socket.on("lobby", (data) => {
+    setUsers(data);
+  });
 
   return (
     <div>
       <PageTitle title="Game Lobby" />
-      <Logo
-        className="logo"
-        onClick={() => {
-        history.push("/landing");
-        }}
-      />
-      <Container fluid className="lobbyContainer">
-        <Row>
-          <Col lg={{ span: 4, offset: 4 }}>
-            <label className="lobbyDiv">Host: XxPolarDealerxX</label>
-          </Col>
-        </Row>
 
-        <Row>
-          <Col lg={{ span: 4, offset: 4 }}>
-            <label className="lobbyDiv">Waiting for players . . .</label>
-          </Col>
-        </Row>
-        <Row>
-          <Col lg={{ span: 4, offset: 4 }}>
-            <label className="lobbyDiv">Waiting for players . . .</label>
-          </Col>
-        </Row>
-        <Row>
-          <Col lg={{ span: 4, offset: 4 }}>
-            <label className="lobbyDiv">Waiting for players . . .</label>
-          </Col>
-        </Row>
-        <Row>
-          <Col lg={{ span: 4, offset: 4 }}>
-            <label className="lobbyDiv">Waiting for players . . .</label>
-          </Col>
-        </Row>
-        <Row>
-          <Col lg={{ span: 4, offset: 4 }}>
-            <label className="lobbyDiv">Waiting for players . . .</label>
-          </Col>
-        </Row>
+      <Container fluid className="lobbyContainer">
+        {users &&
+          users.map((user) => (
+            <p>
+              <Row>
+                <Col lg={{ span: 4, offset: 4 }}>
+                  <label className="lobbyDiv">{user}</label>
+                </Col>
+              </Row>
+            </p>
+          ))}
+
         <Row>
           <div className="flexRow">
             <div>
               <label className="lobbyDiv" id="codeDisplayButton">
                 Code:
+                {/* Code: {location.state.table_id  } */}
               </label>
             </div>
 

@@ -5,24 +5,37 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { ReactComponent as Logo } from "./return.svg";
 import { useHistory } from "react-router-dom";
-import socketIOClient from "socket.io-client"; 
+import axios from "axios";
 
-const socket = socketIOClient('http://localhost:3000', {
-  transports: ['websocket'],
-  autoConnect: false,
-})
+const base = "http://localhost:3000/"
 
 function Create() {
-  let history = useHistory();
-  const [connectionStatus, setConnectionStatus] = useState(false)
-  const [time, setTime] = useState([])
-  const [channel, setChannel] = useState()
 
-  var code = Math.floor(100000 + Math.random() * 900000); //generate this from the db
-  //send code through socket
-  socket.on("connection", function(){ //im not actually sure what this does
-    socket.emit('code', { code: code });
-  })
+const history = useHistory();
+
+this.state = {username: ''};
+
+function handleChange(event){
+  this.setState({username: event.target.value});
+}
+
+function createGameClick() {
+    axios.get(base + "create", {
+      headers: {"username": this.state.username } //ACTUAL USERNAME NEEDS TO BE PASSED INSTEAD OF USERA
+    })
+    .then(response => {
+      console.log(response.data)
+      history.push({
+        pathname: '/lobby',
+        state: response.data
+      })
+
+    })
+    .catch(error => {
+      console.log(error);
+    });
+}
+
 
   return (
     <div>
@@ -37,25 +50,20 @@ function Create() {
         <Row className="optionsRow">
             <Col lg={{ span: 4, offset: 4 }}>
                 <label class='optionsButton'>
+                  <form>
                     Username:
-                    <input class = "textEntry" type="text"/> 
+                    <input class = "textEntry" type="text" value = {this.state.username} onChange={this.handleChange} /> 
+                  </form>
                 </label>                       
             </Col>
         </Row>
-        <Row className="optionsRow">
-          <Col lg={{ span: 4, offset: 4 }}>
-            <label class="optionsButton">
-              Code:
-              <div class="codeDisplay">{code}</div>
-            </label>
-          </Col>
-        </Row>
+        
 
         <Row>
           <Col lg={{ span: 4, offset: 4 }}>
             <button
               onClick={() => {
-                history.push("/lobby");
+                createGameClick()
               }}
               className="optionsButton"
             >
