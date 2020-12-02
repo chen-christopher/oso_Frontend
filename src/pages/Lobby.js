@@ -28,12 +28,23 @@ function Lobby() {
     setUsers(data)
   })
 
-
-  
-
   socket.on("lobby", (data) => {
     setUsers(data);
   });
+
+  function startButton(){
+    if (location.state.player_id == '0'){
+      return <button
+        onClick={() => {
+          history.push("/game");
+        }}
+        className="lobbyDiv"
+        id="startButton"
+      >
+        Start
+      </button>
+    }
+  }
 
   return (
     <div>
@@ -61,7 +72,7 @@ function Lobby() {
             <div>
               <label className="lobbyDiv" id="codeDisplayButton">
                 Code:
-                {/* Code: {location.state.table_id  } */}
+                { " " + location.state.table_id} 
               </label>
             </div>
 
@@ -70,6 +81,7 @@ function Lobby() {
                 1/6
               </label>
               <div>
+                <startButton location = {location}/>
                 <button
                   onClick={() => {
                     history.push("/game");
@@ -77,7 +89,7 @@ function Lobby() {
                   className="lobbyDiv"
                   id="startButton"
                 >
-                  Start
+                Start
                 </button>
               </div>
             </div>
