@@ -61,14 +61,6 @@ function createGameClick() {
                 </label>                       
             </Col>
         </Row>
-        <Row className="optionsRow">
-          <Col lg={{ span: 4, offset: 4 }}>
-            <label class="optionsButton">
-              Code:
-              <div class="codeDisplay">{table_id}</div>
-            </label>
-          </Col>
-        </Row>
         
 
         <Row>
