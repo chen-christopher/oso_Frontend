@@ -28,6 +28,13 @@ function Lobby() {
     setUsers(data)
   })
 
+  socket.on('start', (data) => { 
+    if (data.start) {
+      history.push("/game");
+    }
+    
+  })
+
 
   
 
@@ -67,7 +74,7 @@ function Lobby() {
               <div>
                 <button
                   onClick={() => {
-                    history.push("/game");
+                    socket.emit('sendStart', location.state)
                   }}
                   className="lobbyDiv"
                   id="startButton"
