@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import PageTitle from "../components/PageTitle";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { ReactComponent as Logo } from "./return.svg";
 import back from "../cards/back.svg";
 import AS from "../cards/AS.svg";
@@ -41,6 +41,20 @@ function Game() {
 
 
 */
+  const location = useLocation();
+  const [users, setUsers] = useState(location.state.participants_usernames)
+
+  socket.open()
+  socket.on('connect', () => {
+    console.log("CONNECTED")
+  })
+
+  socket.emit('connectToRoom', {"table_id": location.state.table_id})
+
+  socket.on('lobby', (data) => { 
+    setUsers(data)
+  })
+
   const [showCards, setShowCards] = React.useState(false);
   const deal = () => setShowCards(true);
   const Flop = () => {

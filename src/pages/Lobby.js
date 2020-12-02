@@ -28,10 +28,6 @@ function Lobby() {
     setUsers(data)
   })
 
-  socket.on("lobby", (data) => {
-    setUsers(data);
-  });
-
   function startButton(){
     if (location.state.player_id == '0'){
       return <button
