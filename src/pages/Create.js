@@ -17,12 +17,15 @@ const [username, setUsername] = useState('');
 const table_id = '-1'; //must be str
 
 function handleUsername(event){
+  if (event.target.value === ''){
+    //some kind of error handling
+  }
   setUsername(event.target.value);
 }
 
 function createGameClick() {
     axios.get(base + "create", {
-      headers: {"username": username } //ACTUAL USERNAME NEEDS TO BE PASSED INSTEAD OF USERA
+      headers: {"username": username }
     })
     .then(response => {
       console.log(response.data)

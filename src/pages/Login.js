@@ -16,10 +16,16 @@ function Login() {
     const [table_id, setID] = useState('');
     
     function handleUsername(event){
+        if(event.target.value === ""){
+            return; //autogenerate a name?
+        }
         setUsername(event.target.value);
     }
 
     function handleID(event){
+        if(event.target.value === ""){
+            return;
+        }
         setID(event.target.value);
     }
 
