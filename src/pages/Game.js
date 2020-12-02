@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import PageTitle from "../components/PageTitle";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { ReactComponent as Logo } from "./return.svg";
 import back from "../cards/back.svg";
 import AS from "../cards/AS.svg";
@@ -41,6 +41,18 @@ function Game() {
 
 
 */
+  const location = useLocation();
+  const [users, setUsers] = useState(location.state.participants_usernames);
+  socket.open();
+  socket.on("connect", () => {
+    console.log("CONNECTED");
+  });
+
+  socket.emit("connectToRoom", { table_id: location.state.table_id });
+
+  socket.on("lobby", (data) => {
+    setUsers(data);
+  });
   const [showCards, setShowCards] = React.useState(0);
   const deal = () => setShowCards(showCards + 1);
   console.log("count: " + showCards);
@@ -56,7 +68,7 @@ function Game() {
             <img src={back} alt="back" />
             <img src={back} alt="back" />
           </div>
-          <div className="frontCard">
+          <div className="frontCard" id="userCards">
             <img src={AH} alt="back" />
             <img src={ThreeH} alt="back" />
           </div>
@@ -70,7 +82,7 @@ function Game() {
             <img src={TwoC} alt="back" />
             <img src={FourS} alt="back" />
           </div>
-          <div className="frontCard">
+          <div className="frontCard" id="userCards">
             <img src={AH} alt="back" />
             <img src={ThreeH} alt="back" />
           </div>
@@ -85,7 +97,7 @@ function Game() {
             <img src={FourS} alt="back" />
             <img src={AC} alt="back" />
           </div>
-          <div className="frontCard">
+          <div className="frontCard" id="userCards">
             <img src={AH} alt="back" />
             <img src={ThreeH} alt="back" />
           </div>
@@ -101,7 +113,7 @@ function Game() {
             <img src={AC} alt="back" />
             <img src={AD} alt="back" />
           </div>
-          <div className="frontCard">
+          <div className="frontCard" id="userCards">
             <img src={AH} alt="back" />
             <img src={ThreeH} alt="back" />
           </div>
@@ -134,6 +146,7 @@ function Game() {
                   <button onClick={deal}>Deal</button>
                 </div>
                 <Flop />
+                <label className="userLayout">{users}</label>
               </label>
             </div>
           </Col>
