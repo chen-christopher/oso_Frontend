@@ -45,7 +45,12 @@ function Lobby() {
   return (
     <div>
       <PageTitle title="Game Lobby" />
-
+      <Logo
+          className="logo"
+          onClick={() => {
+          history.push("/landing");
+          }}
+      />
       <Container fluid className="lobbyContainer">
         {users &&
           users.map((user) => (
