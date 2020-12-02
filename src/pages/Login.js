@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PageTitle from '../components/PageTitle'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -11,19 +11,20 @@ const base = "http://localhost:3000/"
 function Login() {
     let history = useHistory();
 
-    this.state = {username: '', table_id: ''};
-
+    const [username, setUsername] = useState('');
+    const [table_id, setID] = useState('');
+    
     function handleUsername(event){
-        this.setState({username: event.target.value});
+        setUsername(event.target.value);
     }
 
     function handleID(event){
-        this.setState({username: event.target.value})
+        setID(event.target.value);
     }
 
     function joinGameClick() {
         axios.get(base + "join", {
-            headers: {"username": username, "table_id": table_id} //ACTUAL USERNAME AND TABLE_ID NEEDS TO BE PASSED INSTEAD OF USERA AND TABLE_ID
+            headers: {"username": username, "table_id": parseInt(table_id)} //ACTUAL USERNAME AND TABLE_ID NEEDS TO BE PASSED INSTEAD OF USERA AND TABLE_ID
           })
           .then(response => {
             console.log(response.data)
@@ -46,8 +47,20 @@ function Login() {
                 <Row className="optionsRow">
                     <Col lg={{ span: 4, offset: 4 }}>
                         <label class='optionsButton'>
-                            Code:
-                            <input class = "codeEntry" type="text" /> 
+                            <form>
+                                Username:
+                                <input class = "textEntry" type="text" onChange={handleUsername} /> 
+                            </form>
+                        </label>                       
+                    </Col>
+                </Row>
+                <Row className="optionsRow">
+                    <Col lg={{ span: 4, offset: 4 }}>
+                        <label class='optionsButton'>
+                            <form>
+                                Code:
+                                <input class = "codeEntry" type="text" onChange={handleID}/> 
+                            </form>
                         </label>                       
                     </Col>
                 </Row>

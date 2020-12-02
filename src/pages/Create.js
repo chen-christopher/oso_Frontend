@@ -13,15 +13,15 @@ function Create() {
 
 const history = useHistory();
 
-this.state = {username: ''};
+const [username, setUsername] = useState('');
 
-function handleChange(event){
-  this.setState({username: event.target.value});
+function handleUsername(event){
+  setUsername(event.target.value);
 }
 
 function createGameClick() {
     axios.get(base + "create", {
-      headers: {"username": this.state.username } //ACTUAL USERNAME NEEDS TO BE PASSED INSTEAD OF USERA
+      headers: {"username": username } //ACTUAL USERNAME NEEDS TO BE PASSED INSTEAD OF USERA
     })
     .then(response => {
       console.log(response.data)
@@ -52,7 +52,7 @@ function createGameClick() {
                 <label class='optionsButton'>
                   <form>
                     Username:
-                    <input class = "textEntry" type="text" value = {this.state.username} onChange={this.handleChange} /> 
+                    <input class = "textEntry" type="text"  onChange={handleUsername} /> 
                   </form>
                 </label>                       
             </Col>
