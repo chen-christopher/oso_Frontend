@@ -56,7 +56,7 @@ function Lobby() {
             <div>
               <label className="lobbyDiv" id="codeDisplayButton">
                 Code:
-                {/* Code: {location.state.table_id  } */}
+                { " " + location.state.table_id} 
               </label>
             </div>
 
