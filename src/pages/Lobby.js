@@ -28,18 +28,21 @@ function Lobby() {
     setUsers(data)
   })
 
-  function startButton(){
-    if (location.state.player_id == '0'){
-      return <button
-        onClick={() => {
-          history.push("/game");
-        }}
-        className="lobbyDiv"
-        id="startButton"
+  function StartButton(){
+    //if(location.state.user_id != '0'){
+    //  return null;
+    //}
+    return (
+      <button
+      onClick={() => {
+      history.push("/game");
+      }}
+      className="lobbyDiv"
+      id="startButton"
       >
-        Start
+      Start
       </button>
-    }
+    )
   }
 
   return (
@@ -77,16 +80,7 @@ function Lobby() {
                 1/6
               </label>
               <div>
-                <startButton location = {location}/>
-                <button
-                  onClick={() => {
-                    history.push("/game");
-                  }}
-                  className="lobbyDiv"
-                  id="startButton"
-                >
-                Start
-                </button>
+                <StartButton location = {location}/>
               </div>
             </div>
           </div>

@@ -31,28 +31,13 @@ const socket = socketIOClient("http://localhost:3000", {
 });
 
 function Game() {
-  //HOOKS data = {table_cards: asdasd, active_players: asdasdasd, big_blind_Position: jaksjdkajsd, "players_turn": akjsjdjasd}
-
-  /*
-
-  socket.on("game", data) {
-    updateData(data)
-  }
-
-
-*/
+  let history = useHistory();
   const location = useLocation();
   const [users, setUsers] = useState(location.state.participants_usernames)
 
   socket.open()
   socket.on('connect', () => {
-    console.log("CONNECTED")
-  })
-
-  socket.emit('connectToRoom', {"table_id": location.state.table_id})
-
-  socket.on('lobby', (data) => { 
-    setUsers(data)
+    console.log("CONNECTED GAME")
   })
 
   const [showCards, setShowCards] = React.useState(false);
@@ -69,7 +54,6 @@ function Game() {
     );
   };
 
-  let history = useHistory();
   return (
     <div>
       {/* <img src={require("./return.svg")} className="img-fluid" alt="Return" /> */}
