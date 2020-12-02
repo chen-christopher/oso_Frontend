@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { useHistory } from 'react-router-dom';
 import axios from "axios";
+import { ReactComponent as Logo } from "./return.svg";
 
 const base = "http://localhost:3000/"
 
@@ -42,7 +43,12 @@ function Login() {
     return (
         <div>
             <PageTitle title = "Login"/>
-
+            <Logo
+                className="logo"
+                onClick={() => {
+                history.push("/landing");
+                }}
+            />
             <Container fluid className="containerOptions">
                 <Row className="optionsRow">
                     <Col lg={{ span: 4, offset: 4 }}>
@@ -59,7 +65,7 @@ function Login() {
                         <label class='optionsButton'>
                             <form>
                                 Code:
-                                <input class = "codeEntry" type="text" onChange={handleID}/> 
+                                <input class = "textEntry" type="text" onChange={handleID}/> 
                             </form>
                         </label>                       
                     </Col>
