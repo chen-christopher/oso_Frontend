@@ -16,32 +16,28 @@ function Login() {
     const [table_id, setID] = useState('');
     
     function validateUsername(usr){
-        //let errors = {};
         let isValid = true;
       
         if(usr == ''){
           isValid = false;
-          //errors['username'] = "must have valid username";
         }
         if(typeof(usr) !== 'undefined'){
           if(!usr.match(/^[a-zA-Z]+$/)){
             isValid = false;
-            //errors['username'] = "must be letters only";
           }
         }
-        //this.setstate(errors: errors)
         return isValid;
-      }
+    }
       
-      function handleUsername(event){
+    function handleUsername(event){
         if(validateUsername(event.target.value)){
-          setUsername(event.target.value);
+            setUsername(event.target.value);
         }
         else{
-          setUsername("Guest");
+            setUsername("Guest");
         }
         
-      }
+    }
 
     function idValidation(id){
         let isValid = true;
@@ -49,9 +45,8 @@ function Login() {
             isValid = false;
         }
         if(typeof(id) !== 'undefined'){
-            if(!usr.match(/^[0-9]+$/)){
+            if(!id.match(/^[0-9]+$/)){
                 isValid = false;
-                //errors['username'] = "must be numbers only";
             }
         }
         return isValid;

@@ -14,23 +14,17 @@ function Create() {
 const history = useHistory();
 
 const [username, setUsername] = useState('');
-const table_id = '-1'; //must be str
 
 function validateUsername(usr){
-  //let errors = {};
   let isValid = true;
-
-  if(usr == ''){
+  if(usr == ""){
     isValid = false;
-    //errors['username'] = "must have valid username";
   }
   if(typeof(usr) !== 'undefined'){
     if(!usr.match(/^[a-zA-Z]+$/)){
       isValid = false;
-      //errors['username'] = "must be letters only";
     }
   }
-  //this.setstate(errors: errors)
   return isValid;
 }
 
@@ -41,7 +35,6 @@ function handleUsername(event){
   else{
     setUsername("Host");
   }
-  
 }
 
 function createGameClick() {
