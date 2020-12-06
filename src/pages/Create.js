@@ -39,7 +39,7 @@ function handleUsername(event){
     setUsername(event.target.value);
   }
   else{
-    setUsername("Guest");
+    setUsername("Host");
   }
   
 }

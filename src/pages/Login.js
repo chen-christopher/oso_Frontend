@@ -15,23 +15,58 @@ function Login() {
     const [username, setUsername] = useState('');
     const [table_id, setID] = useState('');
     
-    function handleUsername(event){
-        if(event.target.value === ""){
-            return; //autogenerate a name?
+    function validateUsername(usr){
+        //let errors = {};
+        let isValid = true;
+      
+        if(usr == ''){
+          isValid = false;
+          //errors['username'] = "must have valid username";
         }
-        setUsername(event.target.value);
+        if(typeof(usr) !== 'undefined'){
+          if(!usr.match(/^[a-zA-Z]+$/)){
+            isValid = false;
+            //errors['username'] = "must be letters only";
+          }
+        }
+        //this.setstate(errors: errors)
+        return isValid;
+      }
+      
+      function handleUsername(event){
+        if(validateUsername(event.target.value)){
+          setUsername(event.target.value);
+        }
+        else{
+          setUsername("Guest");
+        }
+        
+      }
+
+    function idValidation(id){
+        let isValid = true;
+        if(id == ''){
+            isValid = false;
+        }
+        if(typeof(id) !== 'undefined'){
+            if(!usr.match(/^[0-9]+$/)){
+                isValid = false;
+                //errors['username'] = "must be numbers only";
+            }
+        }
+        return isValid;
     }
 
     function handleID(event){
-        if(event.target.value === ""){
-            return;
+        if(idValidation(event.target.value)){
+            setID(event.target.value);
         }
-        setID(event.target.value);
+        //join default game?
     }
 
     function joinGameClick() {
         axios.get(base + "join", {
-            headers: {"username": username, "table_id": parseInt(table_id)} //ACTUAL USERNAME AND TABLE_ID NEEDS TO BE PASSED INSTEAD OF USERA AND TABLE_ID
+            headers: {"username": username, "table_id": parseInt(table_id)}
           })
           .then(response => {
             console.log(response.data)
