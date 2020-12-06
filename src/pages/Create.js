@@ -16,11 +16,32 @@ const history = useHistory();
 const [username, setUsername] = useState('');
 const table_id = '-1'; //must be str
 
-function handleUsername(event){
-  if (event.target.value === ''){
-    //some kind of error handling
+function validateUsername(usr){
+  //let errors = {};
+  let isValid = true;
+
+  if(usr == ''){
+    isValid = false;
+    //errors['username'] = "must have valid username";
   }
-  setUsername(event.target.value);
+  if(typeof(usr) !== 'undefined'){
+    if(!usr.match(/^[a-zA-Z]+$/)){
+      isValid = false;
+      //errors['username'] = "must be letters only";
+    }
+  }
+  //this.setstate(errors: errors)
+  return isValid;
+}
+
+function handleUsername(event){
+  if(validateUsername(event.target.value)){
+    setUsername(event.target.value);
+  }
+  else{
+    setUsername("Guest");
+  }
+  
 }
 
 function createGameClick() {
