@@ -1,5 +1,6 @@
 import React from "react";
 function UserBlock(props) {
+  let test = "AH";
   return (
     <div className="userDiv">
       <div className="userInfo">
@@ -9,7 +10,7 @@ function UserBlock(props) {
       </div>
       <div className="userBlockCards">
         <img src={props.card1} />
-        <img src={props.card1} />
+        <img src={props.card2} />
       </div>
     </div>
   );

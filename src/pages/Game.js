@@ -54,7 +54,6 @@ function Game() {
     participants_current_money: [1000, 500, 800],
     participants_bets: [0, 0, 200],
   };
-
   const UsersCards = () => {
     const userRows = [];
     for (let userIndex = 0; userIndex < usernames.length; userIndex++) {
