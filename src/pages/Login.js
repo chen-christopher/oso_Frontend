@@ -29,10 +29,15 @@ function Login() {
           })
           .then(response => {
             console.log(response.data)
+            if (response.data == "ERROR") {
+                console.log("INVALID")//SHOW INVALID MESSAGE
+            } else {
             history.push({
               pathname: '/lobby',
               state: response.data
             })
+            }
+            
       
           })
           .catch(error => {

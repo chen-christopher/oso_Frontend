@@ -24,6 +24,7 @@ function Create() {
         headers: { username: username }, //ACTUAL USERNAME NEEDS TO BE PASSED INSTEAD OF USERA
       })
       .then((response) => {
+        //{"table_id": table_id, "participants_usernames": [username], "player_id": 0}
         console.log(response.data);
         history.push({
           pathname: "/lobby",

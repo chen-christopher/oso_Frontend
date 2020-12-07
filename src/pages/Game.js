@@ -22,8 +22,15 @@ import FourS from "../cards/4S.svg";
 import FourH from "../cards/4H.svg";
 import FourD from "../cards/4D.svg";
 import FourC from "../cards/4C.svg";
+import FiveS from "../cards/5S.svg";
+import FiveH from "../cards/5H.svg";
+import FiveD from "../cards/5D.svg";
+import FiveC from "../cards/5C.svg";
 
 import socketIOClient from "socket.io-client";
+import UserBlock from "../components/userBlock";
+import TableCards from "../components/tableCards";
+import { propTypes } from "react-bootstrap/esm/Image";
 
 const socket = socketIOClient("http://localhost:3000", {
   transports: ["websocket"],
@@ -31,104 +38,50 @@ const socket = socketIOClient("http://localhost:3000", {
 });
 
 function Game() {
-  //HOOKS data = {table_cards: asdasd, active_players: asdasdasd, big_blind_Position: jaksjdkajsd, "players_turn": akjsjdjasd}
+  const location = useLocation(); //{"table_id": table_id, "participants_usernames": [username], "player_id": 0}
 
-  /*
+  const table_id = location.state.table_id;
+  const player_id = location.state.player_id;
+  const usernames = location.state.participants_usernames;
+  var game = {
+    pot: 200,
+    participants_cards: ["AH,TwoH", "TenC,EightH", "NineC,EightC"],
+    table_cards: ["TwoC", "2D", "3D"],
+    current_round_type: 1,
+    player_turn_id: 0,
+    active_participants: [true, true, true],
+    top_matching_bet: 200,
+    participants_current_money: [1000, 500, 800],
+    participants_bets: [0, 0, 200],
+  };
+  const UsersCards = () => {
+    const userRows = [];
+    for (let userIndex = 0; userIndex < usernames.length; userIndex++) {
+      let spliceChar = game.participants_cards[userIndex].indexOf(",");
+      let firstCard = game.participants_cards[userIndex].slice(0, spliceChar);
+      let secCard = game.participants_cards[userIndex].slice(
+        spliceChar + 1,
+        game.participants_cards[userIndex].length
+      );
+      userRows.push(
+        <UserBlock
+          username={usernames[userIndex]}
+          money={game.participants_current_money[userIndex]}
+          betAmount={game.participants_bets[userIndex]}
+          card1={{ firstCard }} //come from game.participants_cards[userIndex]
+          card2={{ secCard }}
+        />
+      );
+    }
+    return <div>{userRows}</div>;
+  };
 
-  socket.on("game", data) {
-    updateData(data)
-  }
-
-
-*/
-  const location = useLocation();
-  const [users, setUsers] = useState(location.state.participants_usernames);
-  socket.open();
-  socket.on("connect", () => {
-    console.log("CONNECTED");
-  });
-
-  socket.emit("connectToRoom", { table_id: location.state.table_id });
-
-  socket.on("lobby", (data) => {
-    setUsers(data);
-  });
   const [showCards, setShowCards] = React.useState(0);
   const deal = () => setShowCards(showCards + 1);
-  console.log("count: " + showCards);
-  const Flop = () => {
-    if (showCards === 0) {
-      return null;
-    }
-    if (showCards === 1) {
-      return (
-        <div>
-          <div className="frontCard">
-            <img src={back} alt="back" />
-            <img src={back} alt="back" />
-            <img src={back} alt="back" />
-          </div>
-          <div className="frontCard" id="userCards">
-            <img src={AH} alt="back" />
-            <img src={ThreeH} alt="back" />
-          </div>
-        </div>
-      );
-    } else if (showCards === 2) {
-      return (
-        <div>
-          <div className="frontCard">
-            <img src={AS} alt="back" />
-            <img src={TwoC} alt="back" />
-            <img src={FourS} alt="back" />
-          </div>
-          <div className="frontCard" id="userCards">
-            <img src={AH} alt="back" />
-            <img src={ThreeH} alt="back" />
-          </div>
-        </div>
-      );
-    } else if (showCards === 3) {
-      return (
-        <div>
-          <div className="frontCard">
-            <img src={AS} alt="back" />
-            <img src={TwoC} alt="back" />
-            <img src={FourS} alt="back" />
-            <img src={AC} alt="back" />
-          </div>
-          <div className="frontCard" id="userCards">
-            <img src={AH} alt="back" />
-            <img src={ThreeH} alt="back" />
-          </div>
-        </div>
-      );
-    } else if (showCards === 4) {
-      return (
-        <div>
-          <div className="frontCard">
-            <img src={AS} alt="back" />
-            <img src={TwoC} alt="back" />
-            <img src={FourS} alt="back" />
-            <img src={AC} alt="back" />
-            <img src={AD} alt="back" />
-          </div>
-          <div className="frontCard" id="userCards">
-            <img src={AH} alt="back" />
-            <img src={ThreeH} alt="back" />
-          </div>
-        </div>
-      );
-    } else {
-      setShowCards(0);
-      return null;
-    }
-  };
 
   let history = useHistory();
   return (
     <div>
-      {/* <img src={require("./return.svg")} className="img-fluid" alt="Return" /> */}
       <PageTitle title="Polar Poker" />
       <Logo
         className="logo"
@@ -136,36 +89,24 @@ function Game() {
           history.push("/landing");
         }}
       />
-      <Container fluid className="gameContainer">
-        <Row>
-          <Col lg={{ span: 8, offset: 2 }}>
-            <div className="gameStyles">
-              <label className="gameTable">
-                <div className="cardLayout">
-                  <img id="backCard" src={back} />
-                  <button onClick={deal}>Deal</button>
-                </div>
-                <Flop />
-                <label className="userLayout">{users}</label>
-              </label>
+      <Container fluid className="testContainer">
+        <div className="testUserBlock">
+          <UsersCards />
+        </div>
+
+        <div className="gameStyles">
+          <div className="cardLayout">
+            <div className="gameTable">
+              <TableCards />
             </div>
-          </Col>
-        </Row>
-        <Row className="gameContainer">
-          <Col>
-            <div className="posBottom">
+          </div>
+        </div>
+        {/* <div className="buttonRow">
               <button className="buttonStyles">Fold</button>
-            </div>
-          </Col>
-          <Col>
-            <div className="posBottom">
               <button className="buttonStyles">Check</button>
-            </div>
-          </Col>
-          <Col>
-            <button className="buttonStyles">Raise</button>
-          </Col>
-        </Row>
+              <button className="buttonStyles">Call</button>
+              <button className="buttonStyles">Raise</button>
+            </div> */}
       </Container>
     </div>
   );
