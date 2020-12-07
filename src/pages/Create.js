@@ -26,7 +26,7 @@ function Create() {
       .then((response) => {
         console.log(response.data);
         history.push({
-          pathname: "/game",
+          pathname: "/lobby",
           state: response.data,
         });
       })

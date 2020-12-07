@@ -25,6 +25,7 @@ import FourC from "../cards/4C.svg";
 
 import socketIOClient from "socket.io-client";
 import UserBlock from "../components/userBlock";
+import TableCards from "../components/tableCards";
 import { propTypes } from "react-bootstrap/esm/Image";
 
 const socket = socketIOClient("http://localhost:3000", {
@@ -33,31 +34,20 @@ const socket = socketIOClient("http://localhost:3000", {
 });
 
 function Game() {
-  //HOOKS data = {table_cards: asdasd, active_players: asdasdasd, big_blind_Position: jaksjdkajsd, "players_turn": akjsjdjasd}
+  
 
-  /*
+  const location = useLocation();//{"table_id": table_id, "participants_usernames": [username], "player_id": 0}
 
-  socket.on("game", data) {
-    updateData(data)
-  }
+  const table_id = location.state.table_id
+  const player_id = location.state.player_id
 
-
-*/
-  const location = useLocation();
-  const [users, setUsers] = useState(location.state.participants_usernames);
-  socket.open();
-  socket.on("connect", () => {
-    console.log("CONNECTED");
-  });
-
-  socket.emit("connectToRoom", { table_id: location.state.table_id });
-
-  socket.on("game", (data) => {
-    setUsers(data);
-  });
+ 
   const [showCards, setShowCards] = React.useState(0);
   const deal = () => setShowCards(showCards + 1);
+
   console.log("count: " + showCards);
+
+
   const Flop = () => {
     if (showCards === 0) {
       return null;
@@ -124,7 +114,7 @@ function Game() {
       <Container fluid className="testContainer">
         <div className="testUserBlock">
           <UserBlock
-            username={users}
+            username={"abcd"}
             money="100"
             betAmount="50000"
             card1={back}
@@ -134,9 +124,7 @@ function Game() {
         <div className="gameStyles">
           <div className="cardLayout">
             <label className="gameTable">
-              <img id="backCard" src={back} />
-              <button onClick={deal}>Deal</button>
-              <Flop />
+              <TableCards/>
             </label>
           </div>
         </div>
