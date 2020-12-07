@@ -93,6 +93,7 @@ body {
   font-size: 3rem;
   text-align: center;
   justify-content: center;
+  width: 100%;
 }
 .gameStyles img {
   width: 80px;
@@ -104,8 +105,8 @@ body {
 /*div itself */
 .gameTable {
   background-color: seagreen;
-  width: 100%;
-  height: 55vh;
+  width: 60vw;
+  height: 60vh;
   border-radius: 10px;
 }
 /*styling buttons*/
@@ -140,20 +141,39 @@ body {
   display: flex;
   justify-content: center;
 }
-.userLayout {
-  position: absolute;
-  left: 35%;
-  bottom: -10%;
-  margin-top: 0;
-  border-radius: 10px;
-  text-align: center;
-  width: 30%;
-  font-size: 2rem;
-  color: rgb(255, 255, 255);
-  background-color: rgba(81, 148, 250, 1);
-  border-style: none;
+.userDiv {
+  display: flex;
+  flex-direction: row;
+  background-color: darkgray;
+  font-family: "Dosis", sans-serif;
+  font-size: 1.2rem;
+  margin-left: 1vw;
+  margin-top: 2vh;
+  width: 18vw;
+  margin-right: 1vw;
 }
-#userCards {
-  margin-top: 0.5em;
-  margin-bottom: 0;
+.userInfo {
+  margin-top: 1vh;
+  margin-left: 0.2vw;
+  display: flex;
+  flex-direction: column;
+}
+.userBlockCards {
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
+  margin-right: 0.2vw;
+  /* transform: translate(0.6vw, 0); */
+}
+.userBlockCards img {
+  width: 4vw;
+  margin-left: 0.2vw;
+  margin-right: 0.2vw;
+}
+.testContainer {
+  display: flex;
+  flex-direction: row;
+}
+.testUserBlock {
+  display: block;
 }

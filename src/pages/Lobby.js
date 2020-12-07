@@ -30,7 +30,10 @@ function Lobby() {
 
   socket.on('start', (data) => { 
     if (data.start) {
-      history.push("/game");
+      history.push({
+        pathname: "/game",
+        state: location.state,//{"table_id": table_id, "participants_usernames": [username], "player_id": 0}
+      });
     }
     
   })
