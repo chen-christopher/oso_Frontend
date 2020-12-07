@@ -29,9 +29,9 @@ function Lobby() {
   })
 
   function StartButton(){
-    if (location.state.user_id != '0'){
-      return null; //don't display a start button
-    }
+    //if (location.state.user_id != '0'){
+    // return null; //don't display a start button
+    //}
     return ( //the start button
       <button
       onClick={() => {

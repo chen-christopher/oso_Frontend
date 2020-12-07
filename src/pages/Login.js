@@ -18,7 +18,7 @@ function Login() {
     
     function nonEmptyInput(input){
         //let isValid = true;
-        if(input.value.length == 0){
+        if(String(input).length == 0){
             return false;
         }
         return true;
