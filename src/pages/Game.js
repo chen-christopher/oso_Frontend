@@ -40,8 +40,8 @@ const socket = socketIOClient("http://localhost:3000", {
 function Game() {
   const location = useLocation(); //{"table_id": table_id, "participants_usernames": [username], "player_id": 0}
 
-  const table_id = location.state.table_id;
-  const player_id = location.state.player_id;
+  //const table_id = location.state.table_id;
+  //const player_id = location.state.player_id;
   const usernames = location.state.participants_usernames;
   var game = {
     pot: 200,
