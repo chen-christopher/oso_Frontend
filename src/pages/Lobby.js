@@ -28,22 +28,19 @@ function Lobby() {
     setUsers(data)
   })
 
-  function StartButton(){
-    //if (location.state.user_id != '0'){
-    // return null; //don't display a start button
-    //}
-    return ( //the start button
-      <button
-      onClick={() => {
+  socket.on('start', (data) => { 
+    if (data.start) {
       history.push("/game");
-      }}
-      className="lobbyDiv"
-      id="startButton"
-      >
-      Start
-      </button>
-    )
-  }
+    }
+    
+  })
+
+
+  
+
+  socket.on("lobby", (data) => {
+    setUsers(data);
+  });
 
   return (
     <div>
@@ -80,7 +77,15 @@ function Lobby() {
                 1/6
               </label>
               <div>
-                <StartButton location = {location}/>
+                <button
+                  onClick={() => {
+                    socket.emit('sendStart', location.state)
+                  }}
+                  className="lobbyDiv"
+                  id="startButton"
+                >
+                  Start
+                </button>
               </div>
             </div>
           </div>

@@ -40,18 +40,89 @@ function Game() {
     console.log("CONNECTED GAME")
   })
 
-  const [showCards, setShowCards] = React.useState(false);
-  const deal = () => setShowCards(true);
+
+  const location = useLocation();
+  const [users, setUsers] = useState(location.state.participants_usernames);
+  socket.open();
+  socket.on("connect", () => {
+    console.log("CONNECTED");
+  });
+
+  socket.emit("connectToRoom", { table_id: location.state.table_id });
+
+  socket.on("lobby", (data) => {
+    setUsers(data);
+  });
+  const [showCards, setShowCards] = React.useState(0);
+  const deal = () => setShowCards(showCards + 1);
+  console.log("count: " + showCards);
   const Flop = () => {
-    return (
-      <div className="frontCard">
-        <img src={TwoS} alt="2S" />
-        <img src={ThreeH} alt="3H" />
-        <img src={AS} alt="AS" />
-        {/* <img src={FourH} alt="4H"/>
-  <img src={ThreeS} alt="3S" /> */}
-      </div>
-    );
+    if (showCards === 0) {
+      return null;
+    }
+    if (showCards === 1) {
+      return (
+        <div>
+          <div className="frontCard">
+            <img src={back} alt="back" />
+            <img src={back} alt="back" />
+            <img src={back} alt="back" />
+          </div>
+          <div className="frontCard" id="userCards">
+            <img src={AH} alt="back" />
+            <img src={ThreeH} alt="back" />
+          </div>
+        </div>
+      );
+    } else if (showCards === 2) {
+      return (
+        <div>
+          <div className="frontCard">
+            <img src={AS} alt="back" />
+            <img src={TwoC} alt="back" />
+            <img src={FourS} alt="back" />
+          </div>
+          <div className="frontCard" id="userCards">
+            <img src={AH} alt="back" />
+            <img src={ThreeH} alt="back" />
+          </div>
+        </div>
+      );
+    } else if (showCards === 3) {
+      return (
+        <div>
+          <div className="frontCard">
+            <img src={AS} alt="back" />
+            <img src={TwoC} alt="back" />
+            <img src={FourS} alt="back" />
+            <img src={AC} alt="back" />
+          </div>
+          <div className="frontCard" id="userCards">
+            <img src={AH} alt="back" />
+            <img src={ThreeH} alt="back" />
+          </div>
+        </div>
+      );
+    } else if (showCards === 4) {
+      return (
+        <div>
+          <div className="frontCard">
+            <img src={AS} alt="back" />
+            <img src={TwoC} alt="back" />
+            <img src={FourS} alt="back" />
+            <img src={AC} alt="back" />
+            <img src={AD} alt="back" />
+          </div>
+          <div className="frontCard" id="userCards">
+            <img src={AH} alt="back" />
+            <img src={ThreeH} alt="back" />
+          </div>
+        </div>
+      );
+    } else {
+      setShowCards(0);
+      return null;
+    }
   };
 
   return (
@@ -73,7 +144,8 @@ function Game() {
                   <img id="backCard" src={back} />
                   <button onClick={deal}>Deal</button>
                 </div>
-                {showCards ? <Flop /> : null}
+                <Flop />
+                <label className="userLayout">{users}</label>
               </label>
             </div>
           </Col>
@@ -96,8 +168,5 @@ function Game() {
       </Container>
     </div>
   );
-}
-{
-  /* <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> */
 }
 export default Game;
