@@ -24,6 +24,8 @@ import FourD from "../cards/4D.svg";
 import FourC from "../cards/4C.svg";
 
 import socketIOClient from "socket.io-client";
+import UserBlock from "../components/userBlock";
+import { propTypes } from "react-bootstrap/esm/Image";
 
 const socket = socketIOClient("http://localhost:3000", {
   transports: ["websocket"],
@@ -50,7 +52,7 @@ function Game() {
 
   socket.emit("connectToRoom", { table_id: location.state.table_id });
 
-  socket.on("lobby", (data) => {
+  socket.on("game", (data) => {
     setUsers(data);
   });
   const [showCards, setShowCards] = React.useState(0);
@@ -62,61 +64,37 @@ function Game() {
     }
     if (showCards === 1) {
       return (
-        <div>
-          <div className="frontCard">
-            <img src={back} alt="back" />
-            <img src={back} alt="back" />
-            <img src={back} alt="back" />
-          </div>
-          <div className="frontCard" id="userCards">
-            <img src={AH} alt="back" />
-            <img src={ThreeH} alt="back" />
-          </div>
+        <div className="frontCard">
+          <img src={back} alt="back" />
+          <img src={back} alt="back" />
+          <img src={back} alt="back" />
         </div>
       );
     } else if (showCards === 2) {
       return (
-        <div>
-          <div className="frontCard">
-            <img src={AS} alt="back" />
-            <img src={TwoC} alt="back" />
-            <img src={FourS} alt="back" />
-          </div>
-          <div className="frontCard" id="userCards">
-            <img src={AH} alt="back" />
-            <img src={ThreeH} alt="back" />
-          </div>
+        <div className="frontCard">
+          <img src={AS} alt="back" />
+          <img src={TwoC} alt="back" />
+          <img src={FourS} alt="back" />
         </div>
       );
     } else if (showCards === 3) {
       return (
-        <div>
-          <div className="frontCard">
-            <img src={AS} alt="back" />
-            <img src={TwoC} alt="back" />
-            <img src={FourS} alt="back" />
-            <img src={AC} alt="back" />
-          </div>
-          <div className="frontCard" id="userCards">
-            <img src={AH} alt="back" />
-            <img src={ThreeH} alt="back" />
-          </div>
+        <div className="frontCard">
+          <img src={AS} alt="back" />
+          <img src={TwoC} alt="back" />
+          <img src={FourS} alt="back" />
+          <img src={AC} alt="back" />
         </div>
       );
     } else if (showCards === 4) {
       return (
-        <div>
-          <div className="frontCard">
-            <img src={AS} alt="back" />
-            <img src={TwoC} alt="back" />
-            <img src={FourS} alt="back" />
-            <img src={AC} alt="back" />
-            <img src={AD} alt="back" />
-          </div>
-          <div className="frontCard" id="userCards">
-            <img src={AH} alt="back" />
-            <img src={ThreeH} alt="back" />
-          </div>
+        <div className="frontCard">
+          <img src={AS} alt="back" />
+          <img src={TwoC} alt="back" />
+          <img src={FourS} alt="back" />
+          <img src={AC} alt="back" />
+          <img src={AD} alt="back" />
         </div>
       );
     } else {
@@ -136,7 +114,40 @@ function Game() {
           history.push("/landing");
         }}
       />
-      <Container fluid className="gameContainer">
+      {/* <UserBlock
+        username={users}
+        money="100"
+        betAmount="50000"
+        card1={back}
+        card2={back}
+      /> */}
+      <Container fluid className="testContainer">
+        <div className="testUserBlock">
+          <UserBlock
+            username={users}
+            money="100"
+            betAmount="50000"
+            card1={back}
+            card2={back}
+          />
+        </div>
+        <div className="gameStyles">
+          <div className="cardLayout">
+            <label className="gameTable">
+              <img id="backCard" src={back} />
+              <button onClick={deal}>Deal</button>
+              <Flop />
+            </label>
+          </div>
+        </div>
+        {/* <div className="buttonRow">
+              <button className="buttonStyles">Fold</button>
+              <button className="buttonStyles">Check</button>
+              <button className="buttonStyles">Call</button>
+              <button className="buttonStyles">Raise</button>
+            </div> */}
+      </Container>
+      {/* <Container fluid className="gameContainer">
         <Row>
           <Col lg={{ span: 8, offset: 2 }}>
             <div className="gameStyles">
@@ -146,7 +157,6 @@ function Game() {
                   <button onClick={deal}>Deal</button>
                 </div>
                 <Flop />
-                <label className="userLayout">{users}</label>
               </label>
             </div>
           </Col>
@@ -154,19 +164,22 @@ function Game() {
         <Row className="gameContainer">
           <Col>
             <div className="posBottom">
-              <button className="buttonStyles">Fold</button>
+              <button onClick={deal}>Deal</button>
             </div>
           </Col>
           <Col>
             <div className="posBottom">
-              <button className="buttonStyles">Check</button>
+              <button onClick={deal}>Deal</button>
             </div>
+          </Col>
+          <Col>
+            <button className="buttonStyles">Call</button>
           </Col>
           <Col>
             <button className="buttonStyles">Raise</button>
           </Col>
         </Row>
-      </Container>
+      </Container> */}
     </div>
   );
 }
