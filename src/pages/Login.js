@@ -11,32 +11,26 @@ const base = "http://localhost:3000/"
 
 function Login() {
     let history = useHistory();
+    var err = false;
 
     const [username, setUsername] = useState('');
     const [table_id, setID] = useState('');
     
-    function validateUsername(usr){
-        let isValid = true;
-      
-        if(usr == ''){
-          isValid = false;
+    function nonEmptyInput(input){
+        //let isValid = true;
+        if(input.value.length == 0){
+            return false;
         }
-        if(typeof(usr) !== 'undefined'){
-          if(!usr.match(/^[a-zA-Z]+$/)){
-            isValid = false;
-          }
-        }
-        return isValid;
+        return true;
     }
       
     function handleUsername(event){
-        if(validateUsername(event.target.value)){
+        if(nonEmptyInput(event.target.value)){
             setUsername(event.target.value);
         }
         else{
             setUsername("Guest");
         }
-        
     }
 
     function idValidation(id){
@@ -55,8 +49,24 @@ function Login() {
     function handleID(event){
         if(idValidation(event.target.value)){
             setID(event.target.value);
+        }  //join default game?
+    }
+
+    function idError(msg){
+        if(msg){ //if true
+            return (
+                <Row className="optionsRow">
+                    <Col lg={{ span: 4, offset: 4 }}>
+                        <label class='optionsButton'>
+                            INVALID GAME CODE
+                        </label>                       
+                    </Col>
+                </Row>
+            )
         }
-        //join default game?
+        else{
+            return null;
+        }
     }
 
     function joinGameClick() {
@@ -65,11 +75,15 @@ function Login() {
           })
           .then(response => {
             console.log(response.data)
-            history.push({
-              pathname: '/lobby',
-              state: response.data
-            })
-      
+            if(response.data == "ERROR"){
+                err = true;
+            } 
+            else {
+                history.push({
+                pathname: '/lobby',
+                state: response.data
+                })
+            }
           })
           .catch(error => {
             console.log(error);
@@ -86,6 +100,9 @@ function Login() {
                 }}
             />
             <Container fluid className="containerOptions">
+                <div>
+                    <idError msg = {err}/>
+                </div>
                 <Row className="optionsRow">
                     <Col lg={{ span: 4, offset: 4 }}>
                         <label class='optionsButton'>

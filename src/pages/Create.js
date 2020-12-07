@@ -15,21 +15,16 @@ const history = useHistory();
 
 const [username, setUsername] = useState('');
 
-function validateUsername(usr){
-  let isValid = true;
-  if(usr == ""){
-    isValid = false;
+function nonEmptyInput(input){
+  //let isValid = true;
+  if(input.value.length == 0){
+      return false;
   }
-  if(typeof(usr) !== 'undefined'){
-    if(!usr.match(/^[a-zA-Z]+$/)){
-      isValid = false;
-    }
-  }
-  return isValid;
+  return true;
 }
 
 function handleUsername(event){
-  if(validateUsername(event.target.value)){
+  if(nonEmptyInput(event.target.value)){
     setUsername(event.target.value);
   }
   else{
