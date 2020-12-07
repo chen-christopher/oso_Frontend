@@ -40,6 +40,26 @@ function Game() {
 
   const table_id = location.state.table_id
   const player_id = location.state.player_id
+  const usernames = location.state.participants_usernames
+
+  var game = {"pot": 200, "participants_cards" : ["1H,2H","10C,8H","9C,8C"], "table_cards": ["2C", "2D", "3D"], "current_round_type":1, 
+  "player_turn_id": 0, "active_participants": [true, true, true], "top_matching_bet": 200, "paritcipants_current_money": [1000,500,800],
+  "participants_bets": [0,0,200]}
+
+  const usersCards = () => {
+
+    /* for userIndex in range 0, users {
+      display {
+        <UserBlock
+            username= usernames[userIndex]
+            money= game.paritcipants_current_money[userIndex]
+            betAmount= game.participants_bets[userIndex]
+            card1= //come from game.participants_cards[userIndex]
+            card2={back}
+          />
+      }
+    }*/
+  }
 
  
   const [showCards, setShowCards] = React.useState(0);
@@ -48,50 +68,7 @@ function Game() {
   console.log("count: " + showCards);
 
 
-  const Flop = () => {
-    if (showCards === 0) {
-      return null;
-    }
-    if (showCards === 1) {
-      return (
-        <div className="frontCard">
-          <img src={back} alt="back" />
-          <img src={back} alt="back" />
-          <img src={back} alt="back" />
-        </div>
-      );
-    } else if (showCards === 2) {
-      return (
-        <div className="frontCard">
-          <img src={AS} alt="back" />
-          <img src={TwoC} alt="back" />
-          <img src={FourS} alt="back" />
-        </div>
-      );
-    } else if (showCards === 3) {
-      return (
-        <div className="frontCard">
-          <img src={AS} alt="back" />
-          <img src={TwoC} alt="back" />
-          <img src={FourS} alt="back" />
-          <img src={AC} alt="back" />
-        </div>
-      );
-    } else if (showCards === 4) {
-      return (
-        <div className="frontCard">
-          <img src={AS} alt="back" />
-          <img src={TwoC} alt="back" />
-          <img src={FourS} alt="back" />
-          <img src={AC} alt="back" />
-          <img src={AD} alt="back" />
-        </div>
-      );
-    } else {
-      setShowCards(0);
-      return null;
-    }
-  };
+ 
 
   let history = useHistory();
   return (
@@ -121,10 +98,11 @@ function Game() {
             card2={back}
           />
         </div>
+        //userCards called
         <div className="gameStyles">
           <div className="cardLayout">
             <label className="gameTable">
-              <TableCards/>
+              <TableCards />
             </label>
           </div>
         </div>
@@ -175,3 +153,51 @@ function Game() {
   /* <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> */
 }
 export default Game;
+
+
+
+
+ /*const Flop = () => {
+    if (showCards === 0) {
+      return null;
+    }
+    if (showCards === 1) {
+      return (
+        <div className="frontCard">
+          <img src={back} alt="back" />
+          <img src={back} alt="back" />
+          <img src={back} alt="back" />
+        </div>
+      );
+    } else if (showCards === 2) {
+      return (
+        <div className="frontCard">
+          <img src={AS} alt="back" />
+          <img src={TwoC} alt="back" />
+          <img src={FourS} alt="back" />
+        </div>
+      );
+    } else if (showCards === 3) {
+      return (
+        <div className="frontCard">
+          <img src={AS} alt="back" />
+          <img src={TwoC} alt="back" />
+          <img src={FourS} alt="back" />
+          <img src={AC} alt="back" />
+        </div>
+      );
+    } else if (showCards === 4) {
+      return (
+        <div className="frontCard">
+          <img src={AS} alt="back" />
+          <img src={TwoC} alt="back" />
+          <img src={FourS} alt="back" />
+          <img src={AC} alt="back" />
+          <img src={AD} alt="back" />
+        </div>
+      );
+    } else {
+      setShowCards(0);
+      return null;
+    }
+  };*/
