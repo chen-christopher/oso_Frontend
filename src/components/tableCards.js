@@ -19,13 +19,15 @@ import FourC from "../cards/4C.svg";
 
 function TableCards(props) {
   return (
-    <div className="frontCard">
-          <img src={AS} alt="back" />
-          <img src={TwoC} alt="back" />
-          <img src={FourS} alt="back" />
-          <img src={AC} alt="back" />
-          <img src={AD} alt="back" />
-        </div>
+    <div className="tableCardDiv">
+      <div className="frontCard">
+        <img src={AH} alt="back" />
+        <img src={TwoH} alt="back" />
+        <img src={ThreeH} alt="back" />
+        <img src={FourH} alt="back" />
+        <img src={FourD} alt="back" />
+      </div>
+    </div>
   );
 }
 

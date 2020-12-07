@@ -89,7 +89,7 @@ body {
 /*div for table*/
 .gameStyles {
   font-family: "Dosis", sans-serif;
-  display: block;
+  display: flex;
   font-size: 3rem;
   text-align: center;
   justify-content: center;
@@ -141,10 +141,6 @@ body {
   display: flex;
   justify-content: center;
 }
-#userCards {
-  margin-top: 0.5em;
-  margin-bottom: 0;
-}
 .userDiv {
   display: flex;
   flex-direction: row;
@@ -165,12 +161,14 @@ body {
 .userBlockCards {
   display: flex;
   flex-direction: row;
-  transform: translate(0.6vw, 0);
+  margin-left: auto;
+  margin-right: 0.2vw;
+  /* transform: translate(0.6vw, 0); */
 }
 .userBlockCards img {
   width: 4vw;
-  margin-left: 0.1vw;
-  margin-right: 0.1vw;
+  margin-left: 0.2vw;
+  margin-right: 0.2vw;
 }
 .testContainer {
   display: flex;
@@ -178,15 +176,4 @@ body {
 }
 .testUserBlock {
   display: block;
-}
-.testColumn {
-  display: flex;
-  flex-direction: column;
-}
-.tableBlock {
-  display: block;
-}
-.buttonRow {
-  display: flex;
-  flex-direction: row;
 }
