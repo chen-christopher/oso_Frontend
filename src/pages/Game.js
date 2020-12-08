@@ -45,8 +45,8 @@ function Game() {
   const usernames = location.state.participants_usernames;
   var game = {
     pot: 200,
-    participants_cards: ["AH,TwoH", "TenC,EightH", "NineC,EightC"],
-    table_cards: ["TwoC", "2D", "3D"],
+    participants_cards: ["Ah,TwoH", "TenC,EightH", "NineC,EightC"],
+    table_cards: ["../cards/TwoC.svg", "2D", "3D"],
     current_round_type: 1,
     player_turn_id: 0,
     active_participants: [true, true, true],
