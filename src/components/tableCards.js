@@ -57,74 +57,71 @@ import KC from "../cards/KC.svg";
 const cardstable = [
   {
     card: "AS",
-    image: AS
+    image: AS,
   },
-  { card: "AD", image: AD},
-  { card: "AH", image: AH},
-  { card: "AC", image: AC},
+  { card: "AD", image: AD },
+  { card: "AH", image: AH },
+  { card: "AC", image: AC },
   { card: "TwoS", image: TwoS },
   { card: "TwoH", image: TwoH },
   { card: "TwoD", image: TwoD },
   { card: "TwoC", image: TwoC },
-  { card: "ThreeS", image: ThreeS},
-  { card: "ThreeH", image: ThreeH},
-  { card: "ThreeD", image: ThreeD},
-  { card: "ThreeC", image: ThreeC},
-  { card: "FourS", image: FourS},
-  { card: "FourH", image: FourH},
-  { card: "FourD", image: FourD},
-  { card: "FourC", image: FourC},
-  { card: "FiveS", image: FiveS},
-  { card: "FiveD", image: FiveD},
-  { card: "FiveH", image: FiveH},
-  { card: "FiveC", image: FiveC},
-  { card: "SixS", image: SixS},
-  { card: "SixD", image: SixD},
-  { card: "SixH", image: SixH},
-  { card: "SixC", image: SixC},
-  { card: "SevenS", image: SevenS},
-  { card: "SevenD", image: SevenD},
-  { card: "SevenH", image: SevenH},
-  { card: "SevenC", image: SevenC},
-  { card: "EightS", image: EightS},
-  { card: "EightH", image: EightH},
-  { card: "EightD", image: EightD},
-  { card: "EightC", image: EightC},
-  { card: "NineS", image: NineS},
-  { card: "NineD", image: NineD},
-  { card: "NineH", image: NineH},
-  { card: "NineC", image: NineC},
-  { card: "TenS", image: TenS},
-  { card: "TenH", image: TenH},
-  { card: "TenD", image: TenD},
-  { card: "TenC", image: TenC},
-  { card: "JS", image: JS},
-  { card: "QS", image: QS},
-  { card: "KS", image: KS},
-  { card: "JD", image: JD},
-  { card: "QD", image: QD},
-  { card: "KD", image: KD} ,
-  { card: "JH", image: JH},
-  { card: "QH", image: QH},
-  { card: "KH", image: KH},
-  { card: "JC", image: JC},
-  { card: "QC", image: QC},
-  { card: "KC", image: KC}
-]
+  { card: "ThreeS", image: ThreeS },
+  { card: "ThreeH", image: ThreeH },
+  { card: "ThreeD", image: ThreeD },
+  { card: "ThreeC", image: ThreeC },
+  { card: "FourS", image: FourS },
+  { card: "FourH", image: FourH },
+  { card: "FourD", image: FourD },
+  { card: "FourC", image: FourC },
+  { card: "FiveS", image: FiveS },
+  { card: "FiveD", image: FiveD },
+  { card: "FiveH", image: FiveH },
+  { card: "FiveC", image: FiveC },
+  { card: "SixS", image: SixS },
+  { card: "SixD", image: SixD },
+  { card: "SixH", image: SixH },
+  { card: "SixC", image: SixC },
+  { card: "SevenS", image: SevenS },
+  { card: "SevenD", image: SevenD },
+  { card: "SevenH", image: SevenH },
+  { card: "SevenC", image: SevenC },
+  { card: "EightS", image: EightS },
+  { card: "EightH", image: EightH },
+  { card: "EightD", image: EightD },
+  { card: "EightC", image: EightC },
+  { card: "NineS", image: NineS },
+  { card: "NineD", image: NineD },
+  { card: "NineH", image: NineH },
+  { card: "NineC", image: NineC },
+  { card: "TenS", image: TenS },
+  { card: "TenH", image: TenH },
+  { card: "TenD", image: TenD },
+  { card: "TenC", image: TenC },
+  { card: "JS", image: JS },
+  { card: "QS", image: QS },
+  { card: "KS", image: KS },
+  { card: "JD", image: JD },
+  { card: "QD", image: QD },
+  { card: "KD", image: KD },
+  { card: "JH", image: JH },
+  { card: "QH", image: QH },
+  { card: "KH", image: KH },
+  { card: "JC", image: JC },
+  { card: "QC", image: QC },
+  { card: "KC", image: KC },
+];
 
 function TableCards(props) {
-
   //set some array of the cards on the table first
 
   return (
     <div className="tableCardDiv">
       <div className="frontCard">
         <ul>
-          {
-          cardstable.map(card => (
+          {cardstable.map((card) => (
             <img src={card.image} alt="back" />
-          ))
-          }
+          ))}
         </ul>
       </div>
     </div>
