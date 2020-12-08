@@ -113,6 +113,9 @@ const cardstable = [
 ]
 
 function TableCards(props) {
+
+  //set some array of the cards on the table first
+
   return (
     <div className="tableCardDiv">
       <div className="frontCard">
