@@ -116,14 +116,17 @@ function TableCards(props) {
   //set some array of the cards on the table first
 
   return (
-    <div className="tableCardDiv">
-      <div className="frontCard">
-        <ul>
-          {cardstable.map((card) => (
+    <div className="frontCard">
+      <ul>
+        {/* {cardstable.map((card) => (
             <img src={card.image} alt="back" />
-          ))}
-        </ul>
-      </div>
+          ))} */}
+        <img src={cardstable[2].image} />
+        <img src={cardstable[0].image} />
+        <img src={cardstable[10].image} />
+        <img src={cardstable[12].image} />
+        <img src={cardstable[15].image} />
+      </ul>
     </div>
   );
 }

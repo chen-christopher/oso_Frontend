@@ -183,20 +183,19 @@ function Game() {
         <div className="testUserBlock">
           <UsersCards />
         </div>
-
         <div className="gameStyles">
           <div className="cardLayout">
             <div className="gameTable">
               <TableCards />
             </div>
-          </div>
-        </div>
-        {/* <div className="buttonRow">
+            <div className="buttonRow">
               <button className="buttonStyles">Fold</button>
               <button className="buttonStyles">Check</button>
               <button className="buttonStyles">Call</button>
               <button className="buttonStyles">Raise</button>
-            </div> */}
+            </div>
+          </div>
+        </div>
       </Container>
     </div>
   );

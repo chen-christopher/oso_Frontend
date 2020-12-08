@@ -120,6 +120,8 @@ body {
   background-color: darkslategrey;
   color: rgb(255, 255, 255);
   padding: 1rem;
+  margin-left: 1vw;
+  margin-right: 1vw;
 }
 /* logo position/size */
 .logo {
@@ -136,8 +138,8 @@ body {
 }
 .frontCard {
   /* margin-top: 0.5em; */
-  margin-left: 0.5em;
-  margin-right: 0.5em;
+  padding-top: 15%;
+  margin: auto;
   display: flex;
   justify-content: center;
 }
@@ -176,4 +178,9 @@ body {
 }
 .testUserBlock {
   display: block;
+}
+.buttonRow {
+  margin-top: 7vh;
+  display: flex;
+  flex-direction: row;
 }
