@@ -75,16 +75,16 @@ const cardstable = [
   { card: "AH", image: AH },
   { card: "AC", image: AC },
   { card: "TwoS", image: TwoS },
-  { card: "TwoH", image: TwoH },
   { card: "TwoD", image: TwoD },
+  { card: "TwoH", image: TwoH },
   { card: "TwoC", image: TwoC },
   { card: "ThreeS", image: ThreeS },
-  { card: "ThreeH", image: ThreeH },
   { card: "ThreeD", image: ThreeD },
+  { card: "ThreeH", image: ThreeH },
   { card: "ThreeC", image: ThreeC },
   { card: "FourS", image: FourS },
-  { card: "FourH", image: FourH },
   { card: "FourD", image: FourD },
+  { card: "FourH", image: FourH },
   { card: "FourC", image: FourC },
   { card: "FiveS", image: FiveS },
   { card: "FiveD", image: FiveD },
@@ -99,28 +99,28 @@ const cardstable = [
   { card: "SevenH", image: SevenH },
   { card: "SevenC", image: SevenC },
   { card: "EightS", image: EightS },
-  { card: "EightH", image: EightH },
   { card: "EightD", image: EightD },
+  { card: "EightH", image: EightH },
   { card: "EightC", image: EightC },
   { card: "NineS", image: NineS },
   { card: "NineD", image: NineD },
   { card: "NineH", image: NineH },
   { card: "NineC", image: NineC },
   { card: "TenS", image: TenS },
-  { card: "TenH", image: TenH },
   { card: "TenD", image: TenD },
+  { card: "TenH", image: TenH },
   { card: "TenC", image: TenC },
   { card: "JS", image: JS },
-  { card: "QS", image: QS },
-  { card: "KS", image: KS },
   { card: "JD", image: JD },
-  { card: "QD", image: QD },
-  { card: "KD", image: KD },
   { card: "JH", image: JH },
-  { card: "QH", image: QH },
-  { card: "KH", image: KH },
   { card: "JC", image: JC },
+  { card: "QS", image: QS },
+  { card: "QD", image: QD },
+  { card: "QH", image: QH },
   { card: "QC", image: QC },
+  { card: "KS", image: KS }, 
+  { card: "KD", image: KD },
+  { card: "KH", image: KH },
   { card: "KC", image: KC },
 ];
 
@@ -158,7 +158,7 @@ function Game() {
           username={usernames[userIndex]}
           money={game.participants_current_money[userIndex]}
           betAmount={game.participants_bets[userIndex]}
-          card1={firstCard} //come from game.participants_cards[userIndex]
+          card1= {cardstable[0].image} //come from game.participants_cards[userIndex]
           card2={{ secCard }}
         />
       );
