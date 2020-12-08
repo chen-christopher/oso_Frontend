@@ -118,14 +118,72 @@ const cardstable = [
   { card: "QD", image: QD },
   { card: "QH", image: QH },
   { card: "QC", image: QC },
-  { card: "KS", image: KS }, 
+  { card: "KS", image: KS },
   { card: "KD", image: KD },
   { card: "KH", image: KH },
   { card: "KC", image: KC },
 ];
-
+const test = ["back", "AS", "AD", "AH", "AC"];
 function Game() {
-  console.log(cardstable[0].card);
+  function cardIndex(card) {
+    //returns the index of the card
+    var ind = -1;
+    if (card.includes("A")) {
+      ind = 1;
+    }
+    if (card.includes("Two")) {
+      ind = 5;
+    }
+    if (card.includes("Three")) {
+      ind = 9;
+    }
+    if (card.includes("Four")) {
+      ind = 13;
+    }
+    if (card.includes("Five")) {
+      ind = 17;
+    }
+    if (card.includes("Six")) {
+      ind = 21;
+    }
+    if (card.includes("Seven")) {
+      ind = 25;
+    }
+    if (card.includes("Eight")) {
+      ind = 29;
+    }
+    if (card.includes("Nine")) {
+      ind = 33;
+    }
+    if (card.includes("Ten")) {
+      ind = 37;
+    }
+    if (card.includes("J")) {
+      ind = 41;
+    }
+    if (card.includes("Q")) {
+      ind = 45;
+    }
+    if (card.includes("K")) {
+      ind = 49;
+    }
+    if (card.includes("S")) {
+      //do nothing
+    }
+    if (card.includes("D")) {
+      ind += 1;
+    }
+    if (card.includes("H")) {
+      ind += 2;
+    }
+    if (card.includes("C")) {
+      ind += 3;
+    }
+    if (card.includes("back")) {
+      ind = 0;
+    }
+    return ind;
+  }
   const location = useLocation(); //{"table_id": table_id, "participants_usernames": [username], "player_id": 0}
 
   const table_id = location.state.table_id;
@@ -133,8 +191,8 @@ function Game() {
   const usernames = location.state.participants_usernames;
   var game = {
     pot: 200,
-    participants_cards: ["AH,TwoH", "TenC,EightH", "NineC,EightC"],
-    table_cards: ["TwoC", "2D", "3D"],
+    participants_cards: ["TenH,EightD", "TenC,EightH", "NineC,EightC"],
+    table_cards: ["TwoC", "TwoD", "ThreeD", "back", "back"],
     current_round_type: 1,
     player_turn_id: 0,
     active_participants: [true, true, true],
@@ -146,26 +204,49 @@ function Game() {
     const userRows = [];
     for (let userIndex = 0; userIndex < usernames.length; userIndex++) {
       let spliceChar = game.participants_cards[userIndex].indexOf(",");
-      // let firstCard = game.participants_cards[userIndex].slice(0, spliceChar);
-      let firstCard = cardstable[0].image;
-      console.log(firstCard);
+      let firstCard = game.participants_cards[userIndex].slice(0, spliceChar);
       let secCard = game.participants_cards[userIndex].slice(
         spliceChar + 1,
         game.participants_cards[userIndex].length
       );
+      let cardIndexNum1 = cardIndex(firstCard);
+      let cardIndexNum2 = cardIndex(secCard);
+      let userCard1 = cardstable[cardIndexNum1].image;
+      let userCard2 = cardstable[cardIndexNum2].image;
+
       userRows.push(
         <UserBlock
           username={usernames[userIndex]}
           money={game.participants_current_money[userIndex]}
           betAmount={game.participants_bets[userIndex]}
-          card1= {cardstable[0].image} //come from game.participants_cards[userIndex]
-          card2={{ secCard }}
+          firstCard={userCard1} //come from game.participants_cards[userIndex]
+          secondCard={userCard2}
         />
       );
     }
     return <div>{userRows}</div>;
   };
-
+  const CenterCards = () => {
+    let card1_Index = cardIndex(game.table_cards[0]);
+    let card2_Index = cardIndex(game.table_cards[1]);
+    let card3_Index = cardIndex(game.table_cards[2]);
+    let card4_Index = cardIndex(game.table_cards[3]);
+    let card5_Index = cardIndex(game.table_cards[4]);
+    let c1 = cardstable[card1_Index].image;
+    let c2 = cardstable[card2_Index].image;
+    let c3 = cardstable[card3_Index].image;
+    let c4 = cardstable[card4_Index].image;
+    let c5 = cardstable[card5_Index].image;
+    return (
+      <TableCards
+        center1={c1}
+        center2={c2}
+        center3={c3}
+        center4={c4}
+        center5={c5}
+      />
+    );
+  };
   const [showCards, setShowCards] = React.useState(0);
   const deal = () => setShowCards(showCards + 1);
 
@@ -186,7 +267,7 @@ function Game() {
         <div className="gameStyles">
           <div className="cardLayout">
             <div className="gameTable">
-              <TableCards />
+              <CenterCards />
             </div>
             <div className="buttonRow">
               <button className="buttonStyles">Fold</button>

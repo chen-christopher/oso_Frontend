@@ -121,11 +121,11 @@ function TableCards(props) {
         {/* {cardstable.map((card) => (
             <img src={card.image} alt="back" />
           ))} */}
-        <img src={cardstable[2].image} />
-        <img src={cardstable[0].image} />
-        <img src={cardstable[10].image} />
-        <img src={cardstable[12].image} />
-        <img src={cardstable[15].image} />
+        <img src={props.center1} />
+        <img src={props.center2} />
+        <img src={props.center3} />
+        <img src={props.center4} />
+        <img src={props.center5} />
       </ul>
     </div>
   );
