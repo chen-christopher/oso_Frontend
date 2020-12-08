@@ -131,7 +131,7 @@ function UserBlock(props) {
       </div>
       <div className="userBlockCards">
         {
-          usercards.map( cards => (
+          usercards.map( cards => ( //iterates through, for cards in usercards, display
             <img src={cards.image} alt="back" />
           ))
         }
