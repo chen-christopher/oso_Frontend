@@ -40,6 +40,62 @@ const socket = socketIOClient("http://localhost:3000", {
 function Game() {
   const location = useLocation(); //{"table_id": table_id, "participants_usernames": [username], "player_id": 0}
 
+  function cardIndex(card){ //returns the index of the card
+    var ind = -1;
+    if(card.includes('A')){
+      ind = 1;
+    }
+    if(card.includes('Two')){
+      ind = 5;
+    }
+    if(card.includes('Three')){
+      ind = 9;
+    }
+    if(card.includes('Four')){
+      ind = 13;
+    }
+    if(card.includes('Five')){
+      ind = 17;
+    }
+    if(card.includes('Six')){
+      ind = 21;
+    }
+    if(card.includes('Seven')){
+      ind = 25;
+    }
+    if(card.includes('Eight')){
+      ind = 29;
+    }
+    if(card.includes('Nine')){
+      ind = 33;
+    }
+    if(card.includes('Ten')){
+      ind = 37;
+    }
+    if(card.includes('J')){
+      ind = 41;
+    }
+    if(card.includes('Q')){
+      ind = 45;
+    }
+    if(card.includes('K')){
+      ind = 49;
+    }
+    if(card.includes('S')){
+      //do nothing
+    }
+    if(card.includes('D')){
+      ind += 1;
+    }
+    if(card.includes('H')){
+      ind += 2;
+    }
+    if(card.includes('C')){
+      ind += 3;
+    }
+    return ind;
+  }
+
   //const table_id = location.state.table_id;
   //const player_id = location.state.player_id;
   const usernames = location.state.participants_usernames;
