@@ -47,7 +47,7 @@ function Create() {
       />
       <Container fluid className="containerOptions">
         <Row className="optionsRow">
-          <Col lg={{ span: 4, offset: 4 }}>
+          <Col lg={{ span: 8, offset: 2 }}>
             <label class="optionsButton">
               <form>
                 Username:
@@ -62,7 +62,7 @@ function Create() {
         </Row>
 
         <Row>
-          <Col lg={{ span: 4, offset: 4 }}>
+          <Col lg={{ span: 8, offset: 2 }}>
             <button
               onClick={() => {
                 createGameClick();

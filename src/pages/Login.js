@@ -56,7 +56,7 @@ function Login() {
             />
             <Container fluid className="containerOptions">
                 <Row className="optionsRow">
-                    <Col lg={{ span: 4, offset: 4 }}>
+                    <Col lg={{ span: 8, offset: 2 }}>
                         <label class='optionsButton'>
                             <form>
                                 Username:
@@ -66,7 +66,7 @@ function Login() {
                     </Col>
                 </Row>
                 <Row className="optionsRow">
-                    <Col lg={{ span: 4, offset: 4 }}>
+                    <Col lg={{ span: 8, offset: 2 }}>
                         <label class='optionsButton'>
                             <form>
                                 Code:
@@ -77,7 +77,7 @@ function Login() {
                 </Row>
 
                 <Row>
-                    <Col lg={{ span: 4, offset: 4 }}>
+                    <Col lg={{ span: 8, offset: 2 }}>
                         <button onClick={() => {
                             joinGameClick()
                             

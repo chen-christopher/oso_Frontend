@@ -1,27 +1,28 @@
 body {
-  font-family: "Dosis", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 10rem;
 }
 
 .title {
   padding: 1rem;
-  background-color: rgb(245, 226, 201);
-  color: rgb(54, 54, 54);
-  font-family: "Dosis", sans-serif;
+  background-color: rgb(2, 16, 37);
+  box-shadow:  0 0 2vw 2vw rgba(35, 37, 37, 0.24);
+  color: rgb(255, 255, 255);
+  font-family: 'Montserrat', sans-serif;
   font-size: 5rem;
   text-align: center;
 }
 
 .optionsButton {
   border-radius: 10px;
-  font-family: "Dosis", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 3rem;
   margin: 1rem;
   padding: 1rem;
   border-style: none;
   width: 100%;
   align-self: center;
-  background-color: rgba(81, 148, 250, 0.26);
+  background-color: rgb(20, 20, 20);
   color: rgb(255, 255, 255);
 }
 .containerOptions {
@@ -42,14 +43,14 @@ body {
 /* styling for lobby items */
 .lobbyDiv {
   border-radius: 10px;
-  font-family: "Dosis", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 1.5rem;
   margin: 1rem;
   padding: 1rem;
   border-style: none;
   width: 100%;
   align-self: center;
-  background-color: rgba(81, 148, 250, 0.26);
+  background-color: rgba(81, 149, 250, 0.514);
   color: rgb(255, 255, 255);
   text-align: center;
 }
@@ -88,7 +89,7 @@ body {
 }
 /*div for table*/
 .gameStyles {
-  font-family: "Dosis", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   display: flex;
   font-size: 3rem;
   text-align: center;
@@ -104,7 +105,8 @@ body {
 }
 /*div itself */
 .gameTable {
-  background-color: rgb(55, 165, 104);
+  background-color: rgb(206, 206, 206);
+  box-shadow:  0 0 2vw 2vw rgba(35, 37, 37, 0.103);
   width: 60vw;
   height: 60vh;
   border-radius: 10px;
@@ -112,12 +114,13 @@ body {
 /*styling buttons*/
 .buttonStyles {
   border-radius: 10px;
-  font-family: "Dosis", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 1.5rem;
   border-style: none;
   width: 100%;
   align-self: center;
-  background-color: rgb(45, 110, 252); 
+  background-color: rgb(1, 18, 44); 
+  box-shadow:  0 0 2vw 2vw rgba(35, 37, 37, 0.103);
   color: rgb(255, 255, 255);
   padding: 1rem;
   margin-left: 1vw;
@@ -153,8 +156,9 @@ body {
 .userDiv {
   display: flex;
   flex-direction: row;
-  background-color: rgb(243, 226, 226);
-  font-family: "Dosis", sans-serif;
+  background-color: rgb(248, 248, 248);
+  box-shadow:  0 0 2vw 2vw rgba(35, 37, 37, 0.103);
+  font-family: 'Montserrat', sans-serif;
   font-size: 1.2rem;
   margin-left: 1vw;
   margin-top: 2vh;
@@ -164,7 +168,7 @@ body {
 }
 
 .userDivPlayerTurn {
-  background-color: rgb(238, 158, 158);
+  background-color: rgb(255, 111, 86);
 }
 .userInfo {
   margin-top: 1vh;
