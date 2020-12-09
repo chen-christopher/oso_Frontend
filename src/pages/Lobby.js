@@ -7,15 +7,15 @@ import { ReactComponent as Logo } from "./return.svg";
 import { useHistory, useLocation } from "react-router-dom";
 import socketIOClient from "socket.io-client";
 
-const socket = socketIOClient("http://localhost:3000", {
-  transports: ["websocket"],
-  autoConnect: false,
-});
 
-function Lobby() {
+function Lobby(props) {
   let history = useHistory();
   const location = useLocation();
   const [users, setUsers] = useState(location.state.participants_usernames)
+
+  
+
+  const socket = props.socket
 
   socket.open()
   socket.on('connect', () => {
@@ -38,12 +38,6 @@ function Lobby() {
     
   })
 
-
-  
-
-  socket.on("lobby", (data) => {
-    setUsers(data);
-  });
 
   return (
     <div>
@@ -82,7 +76,10 @@ function Lobby() {
               <div>
                 <button
                   onClick={() => {
-                    socket.emit('sendStart', location.state)
+                    socket.emit('sendStart', {table_id: location.state.table_id, 
+                      player_id: location.state.player_id, 
+                      number_player: users.length 
+                      });
                   }}
                   className="lobbyDiv"
                   id="startButton"

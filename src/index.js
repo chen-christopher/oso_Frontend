@@ -7,6 +7,12 @@ import Create from "./pages/Create";
 import Lobby from "./pages/Lobby";
 import Game from "./pages/Game";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import socketIOClient from "socket.io-client";
+
+const socket = socketIOClient("http://localhost:3000", {
+  transports: ["websocket"],
+  autoConnect: false,
+});
 
 ReactDOM.render(
   <Router>
@@ -18,10 +24,10 @@ ReactDOM.render(
         <Login />
       </Route>
       <Route path="/lobby">
-        <Lobby />
+        <Lobby socket = {socket} />
       </Route>
       <Route path="/game">
-        <Game />
+        <Game socket = {socket} />
       </Route>
       <Landing />
     </Switch>

@@ -110,11 +110,23 @@ const cardstable = [
 function UserBlock(props) {
   var usercards = [cardstable[0], cardstable[1]];
 
-  function currCards() {
-    //use this to get the users cards and set usercards to that value
+  function currentCards(firstCard, secondCard, currentUser) {
+    if (currentUser) {
+      return <div className="userBlockCards">
+    
+        <img src= {props.firstCard} alt="back" />
+        <img src={props.secondCard} alt="back" />
+      </div>
+    } else {
+      return <div className="userBlockCards">
+        <img src={props.backCard} alt="back" />
+        <img src={props.backCard} alt="back" />
+      </div>
+    }
 
-    return;
+    
   }
+
 
   return (
     <div className="userDiv">
@@ -123,15 +135,7 @@ function UserBlock(props) {
         <label>Money: {props.money}</label>
         <label>Bet Amount: {props.betAmount}</label>
       </div>
-      <div className="userBlockCards">
-        {/* {usercards.map((
-          cards //iterates through, for cards in usercards, display
-        ) => (
-          <img src={cards.image} alt="back" />
-        ))} */}
-        <img src={props.firstCard} alt="back" />
-        <img src={props.secondCard} alt="back" />
-      </div>
+      {currentCards(props.firstCard, props.secondCard, props.currentUser)}
     </div>
   );
 }

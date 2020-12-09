@@ -58,16 +58,11 @@ import KS from "../cards/KS.svg";
 import KH from "../cards/KH.svg";
 import KD from "../cards/KD.svg";
 import KC from "../cards/KC.svg";
-
-import socketIOClient from "socket.io-client";
 import UserBlock from "../components/userBlock";
 import TableCards from "../components/tableCards";
 import { propTypes } from "react-bootstrap/esm/Image";
 
-const socket = socketIOClient("http://localhost:3000", {
-  transports: ["websocket"],
-  autoConnect: false,
-});
+
 const cardstable = [
   { card: "back", image: back },
   { card: "AS", image: AS },
@@ -124,47 +119,47 @@ const cardstable = [
   { card: "KC", image: KC },
 ];
 const test = ["back", "AS", "AD", "AH", "AC"];
-function Game() {
+function Game(props) {
   function cardIndex(card) {
     //returns the index of the card
     var ind = -1;
-    if (card.includes("A")) {
+    if (card.includes("1")) {
       ind = 1;
     }
-    if (card.includes("Two")) {
+    if (card.includes("2")) {
       ind = 5;
     }
-    if (card.includes("Three")) {
+    if (card.includes("3")) {
       ind = 9;
     }
-    if (card.includes("Four")) {
+    if (card.includes("4")) {
       ind = 13;
     }
-    if (card.includes("Five")) {
+    if (card.includes("5")) {
       ind = 17;
     }
-    if (card.includes("Six")) {
+    if (card.includes("6")) {
       ind = 21;
     }
-    if (card.includes("Seven")) {
+    if (card.includes("7")) {
       ind = 25;
     }
-    if (card.includes("Eight")) {
+    if (card.includes("8")) {
       ind = 29;
     }
-    if (card.includes("Nine")) {
+    if (card.includes("9")) {
       ind = 33;
     }
-    if (card.includes("Ten")) {
+    if (card.includes("10")) {
       ind = 37;
     }
-    if (card.includes("J")) {
+    if (card.includes("11")) {
       ind = 41;
     }
-    if (card.includes("Q")) {
+    if (card.includes("12")) {
       ind = 45;
     }
-    if (card.includes("K")) {
+    if (card.includes("13")) {
       ind = 49;
     }
     if (card.includes("S")) {
@@ -184,25 +179,48 @@ function Game() {
     }
     return ind;
   }
-  const location = useLocation(); //{"table_id": table_id, "participants_usernames": [username], "player_id": 0}
+  const location = useLocation(); 
+
+  const socket = props.socket
+  socket.open()
 
   const table_id = location.state.table_id;
   const player_id = location.state.player_id;
   const usernames = location.state.participants_usernames;
-  var game = {
+  const [game, setGame] = useState({
+    game_id: 0,
     pot: 200,
     participants_cards: ["TenH,EightD", "TenC,EightH", "NineC,EightC"],
-    table_cards: ["TwoC", "TwoD", "ThreeD", "back", "back"],
+    table_cards: ["TwoC", "TwoD", "ThreeD", "ThreeH", "woH"],
     current_round_type: 1,
     player_turn_id: 0,
     active_participants: [true, true, true],
     top_matching_bet: 200,
     participants_current_money: [1000, 500, 800],
     participants_bets: [0, 0, 200],
-  };
+  });
+
+  socket.on('action', (data) => { 
+    console.log(data)
+    setGame(data)
+    
+  })
+
+
+  function raise() {
+    console.log("raise")
+    socket.emit("sendAction", {
+      game_id: game.game_id,
+      player_id: player_id,
+      action_type: 3,
+      amount: 400
+    })
+
+  }
+  
   const UsersCards = () => {
     const userRows = [];
-    for (let userIndex = 0; userIndex < usernames.length; userIndex++) {
+    for (let userIndex = 0; userIndex < game.participants_cards.length; userIndex++) {
       let spliceChar = game.participants_cards[userIndex].indexOf(",");
       let firstCard = game.participants_cards[userIndex].slice(0, spliceChar);
       let secCard = game.participants_cards[userIndex].slice(
@@ -214,13 +232,16 @@ function Game() {
       let userCard1 = cardstable[cardIndexNum1].image;
       let userCard2 = cardstable[cardIndexNum2].image;
 
+      
       userRows.push(
         <UserBlock
+          currentUser = {userIndex === player_id}
           username={usernames[userIndex]}
           money={game.participants_current_money[userIndex]}
           betAmount={game.participants_bets[userIndex]}
           firstCard={userCard1} //come from game.participants_cards[userIndex]
           secondCard={userCard2}
+          backCard={cardstable[0].image}
         />
       );
     }
@@ -270,10 +291,10 @@ function Game() {
               <CenterCards />
             </div>
             <div className="buttonRow">
-              <button className="buttonStyles">Fold</button>
+              <button onclick="" className="buttonStyles">Fold</button>
               <button className="buttonStyles">Check</button>
               <button className="buttonStyles">Call</button>
-              <button className="buttonStyles">Raise</button>
+              <button onClick= {raise}  className="buttonStyles">Raise</button>
             </div>
           </div>
         </div>
