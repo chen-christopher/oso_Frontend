@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 import axios from "axios";
 import { ReactComponent as Logo } from "./return.svg";
 
-const base = "http://localhost:3000/"
+const base = "https://node-poker-backend.herokuapp.com/"
 
 function Login() {
     let history = useHistory();

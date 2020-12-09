@@ -9,7 +9,7 @@ import Game from "./pages/Game";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import socketIOClient from "socket.io-client";
 
-const socket = socketIOClient("http://localhost:3000", {
+const socket = socketIOClient("https://node-poker-backend.herokuapp.com/", {
   transports: ["websocket"],
   autoConnect: false,
 });
