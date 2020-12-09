@@ -115,18 +115,62 @@ const cardstable = [
 function TableCards(props) {
   //set some array of the cards on the table first
 
-  return (
-    <div className="frontCard">
-      <ul>
-        {/* {cardstable.map((card) => (
-            <img src={card.image} alt="back" />
-          ))} */}
+  function cards(round) {
+    switch (round) {
+      case 0:
+        return (
+          <ul>
+        
+        <img src={props.backCard} />
+        <img src={props.backCard} />
+        <img src={props.backCard} />
+        <img src={props.backCard} />
+        <img src={props.backCard} />
+        </ul>
+        );
+      case 1:
+        return (
+          <ul>
+        
+        <img src={props.center1} />
+        <img src={props.center2} />
+        <img src={props.center3} />
+        <img src={props.backCard} />
+        <img src={props.backCard} />
+      </ul>
+        );
+       
+      case 2:
+        return (
+          <ul>
+        
+        <img src={props.center1} />
+        <img src={props.center2} />
+        <img src={props.center3} />
+        <img src={props.center4} />
+        <img src={props.backCard} />
+      </ul>
+        );
+      
+      case 3:
+        return (
+          <ul>
+        
         <img src={props.center1} />
         <img src={props.center2} />
         <img src={props.center3} />
         <img src={props.center4} />
         <img src={props.center5} />
       </ul>
+        );
+        }
+      
+  }
+
+  return (
+    <div className="frontCard">
+      {cards(props.rountType)}
+      
     </div>
   );
 }

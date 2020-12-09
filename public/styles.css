@@ -5,7 +5,7 @@ body {
 
 .title {
   padding: 1rem;
-  background-color: rgb(250, 237, 220);
+  background-color: rgb(245, 226, 201);
   color: rgb(54, 54, 54);
   font-family: "Dosis", sans-serif;
   font-size: 5rem;
@@ -104,7 +104,7 @@ body {
 }
 /*div itself */
 .gameTable {
-  background-color: seagreen;
+  background-color: rgb(55, 165, 104);
   width: 60vw;
   height: 60vh;
   border-radius: 10px;
@@ -117,7 +117,7 @@ body {
   border-style: none;
   width: 100%;
   align-self: center;
-  background-color: darkslategrey;
+  background-color: rgb(45, 110, 252); 
   color: rgb(255, 255, 255);
   padding: 1rem;
   margin-left: 1vw;
@@ -143,16 +143,28 @@ body {
   display: flex;
   justify-content: center;
 }
+
+.winner {
+  background-color: aliceblue;
+  margin: 2rem;
+  padding: 1rem;
+  border-radius: 60px;
+}
 .userDiv {
   display: flex;
   flex-direction: row;
-  background-color: darkgray;
+  background-color: rgb(243, 226, 226);
   font-family: "Dosis", sans-serif;
   font-size: 1.2rem;
   margin-left: 1vw;
   margin-top: 2vh;
   width: 18vw;
   margin-right: 1vw;
+  border-radius: 10px;
+}
+
+.userDivPlayerTurn {
+  background-color: rgb(238, 158, 158);
 }
 .userInfo {
   margin-top: 1vh;

@@ -32,7 +32,10 @@ function Lobby(props) {
     if (data.start) {
       history.push({
         pathname: "/game",
-        state: location.state,//{"table_id": table_id, "participants_usernames": [username], "player_id": 0}
+        state: {table_id: location.state.table_id, 
+          participants_usernames: users, 
+          player_id: location.state.player_id
+        }
       });
     }
     

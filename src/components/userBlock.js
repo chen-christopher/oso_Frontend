@@ -113,7 +113,6 @@ function UserBlock(props) {
   function currentCards(firstCard, secondCard, currentUser) {
     if (currentUser) {
       return <div className="userBlockCards">
-    
         <img src= {props.firstCard} alt="back" />
         <img src={props.secondCard} alt="back" />
       </div>
@@ -127,17 +126,31 @@ function UserBlock(props) {
     
   }
 
-
-  return (
-    <div className="userDiv">
-      <div className="userInfo">
-        <label>{props.username}</label>
-        <label>Money: {props.money}</label>
-        <label>Bet Amount: {props.betAmount}</label>
+  if (props.currentPlayer) {
+    return (
+      <div className="userDiv userDivPlayerTurn">
+        <div className="userInfo">
+          <label>{props.username}</label>
+          <label>Money: {props.money}</label>
+          <label>Bet Amount: {props.betAmount}</label>
+        </div>
+        {currentCards(props.firstCard, props.secondCard, props.currentUser)}
       </div>
-      {currentCards(props.firstCard, props.secondCard, props.currentUser)}
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div className="userDiv">
+        <div className="userInfo">
+          <label>{props.username}</label>
+          <label>Money: {props.money}</label>
+          <label>Bet Amount: {props.betAmount}</label>
+        </div>
+        {currentCards(props.firstCard, props.secondCard, props.currentUser)}
+      </div>
+    );
+  }
+
+  
 }
 
 export default UserBlock;

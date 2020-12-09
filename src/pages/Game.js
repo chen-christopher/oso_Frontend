@@ -207,13 +207,39 @@ function Game(props) {
   })
 
 
+  function fold() {
+    socket.emit("sendAction", {
+      game_id: game.game_id,
+      player_id: player_id,
+      action_type: 0,
+      amount: 0
+    })
+
+  }
+  function check() {
+    socket.emit("sendAction", {
+      game_id: game.game_id,
+      player_id: player_id,
+      action_type: 1,
+      amount: 0
+    })
+
+  }
+  function call() {
+    socket.emit("sendAction", {
+      game_id: game.game_id,
+      player_id: player_id,
+      action_type: 2,
+      amount: 0
+    })
+
+  }
   function raise() {
-    console.log("raise")
     socket.emit("sendAction", {
       game_id: game.game_id,
       player_id: player_id,
       action_type: 3,
-      amount: 400
+      amount: 100
     })
 
   }
@@ -236,6 +262,7 @@ function Game(props) {
       userRows.push(
         <UserBlock
           currentUser = {userIndex === player_id}
+          currentPlayer = {userIndex === game.player_turn_id}
           username={usernames[userIndex]}
           money={game.participants_current_money[userIndex]}
           betAmount={game.participants_bets[userIndex]}
@@ -260,6 +287,8 @@ function Game(props) {
     let c5 = cardstable[card5_Index].image;
     return (
       <TableCards
+        backCard={cardstable[0].image}
+        rountType = {game.current_round_type}
         center1={c1}
         center2={c2}
         center3={c3}
@@ -270,6 +299,36 @@ function Game(props) {
   };
   const [showCards, setShowCards] = React.useState(0);
   const deal = () => setShowCards(showCards + 1);
+
+  const totalBet = () => {
+    var sum = 0
+    for (var i=0; i < game.participants_bets; i++) {
+      sum += 50
+    }
+    return (
+      <h1>
+        BET: {game.participants_bets.reduce(function(a, b) { return a + b; }, 0)}
+      </h1>
+    )
+  }
+
+  const winnerDisplay = () => {
+    if (game.winner != null) {
+      return (
+        <div className="winner">
+          <h1>
+          WINNER:  {usernames[game.winner]} 
+        </h1>
+        <h2>
+          {game.winnerPattern.slice(8)}
+        </h2>
+        </div>
+        
+      )
+    }
+    return
+    
+  }
 
   let history = useHistory();
   return (
@@ -289,11 +348,14 @@ function Game(props) {
           <div className="cardLayout">
             <div className="gameTable">
               <CenterCards />
+              {totalBet()}
+              {winnerDisplay()}
             </div>
+            
             <div className="buttonRow">
-              <button onclick="" className="buttonStyles">Fold</button>
-              <button className="buttonStyles">Check</button>
-              <button className="buttonStyles">Call</button>
+              <button onClick= {fold} onclick="" className="buttonStyles">Fold</button>
+              <button onClick= {check} className="buttonStyles">Check</button>
+              <button onClick= {call} className="buttonStyles">Call</button>
               <button onClick= {raise}  className="buttonStyles">Raise</button>
             </div>
           </div>
